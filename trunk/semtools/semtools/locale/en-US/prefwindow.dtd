@@ -1,0 +1,25 @@
+<!ENTITY prefwindow.title "SEM Tools - Settings">
+<!ENTITY pane1.title "Ad Highlighter">
+<!ENTITY pane2.title "Search Engine Links">
+<!ENTITY includeList "Included Sites">
+<!ENTITY excludeList "Excluded Sites">
+<!ENTITY showAdCounter.label "Show Ad Counter">
+<!ENTITY enableAdHighlighter.label "Enable Ad Highlighter">
+<!ENTITY enableAdCounter.label "Enable Ad Counter">
+<!ENTITY checkboolpref.accesskey "A">
+<!ENTITY intpref.label "An Integer Preference">
+<!ENTITY intpref.accesskey "I">
+<!ENTITY stringpref.label "A String Preference">
+<!ENTITY stringpref.accesskey "S">
+<!ENTITY companyName.label "Company Name">
+<!ENTITY displayName.label "Display Name">
+<!ENTITY colour.label "Color">
+<!ENTITY matchString.label "Match String">
+<!ENTITY companyURL.label "Company URL">
+<!ENTITY enableSearchEngineLinks.label "Enable Search Engine Links">
+<!ENTITY searchEngineName.label "Search Engine Name">
+<!ENTITY displayName.label "Display Name">
+<!ENTITY domainName.label "Domain Name">
+<!ENTITY queryParameter.label "Query Parameter">
+<!ENTITY urlFormat.label "URL Format">
+<!ENTITY spaceSeperator.label "Space Seperator">
