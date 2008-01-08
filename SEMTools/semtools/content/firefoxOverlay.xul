@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://adhighlighter/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://adhighlighter/locale/adhighlighter.dtd">
+<overlay id="adhighlighter-overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script src="overlay.js"/>
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="adhighlighter-strings" src="chrome://adhighlighter/locale/adhighlighter.properties"/>
+  </stringbundleset>
+
+  <menupopup id="menu_ToolsPopup">
+    <menuitem id="semtools-settings" label="&adhighlighter.label;" 
+    					accesskey="&semToolsSettings.accesskey;"
+              oncommand="showSEMToolsSettings();"/>
+  </menupopup>
+  <popup id="contentAreaContextMenu">
+    <menuitem id="context-adhighlighter" label="&adhighlighterContext.label;"
+              accesskey="&adhighlighterContext.accesskey;"
+              insertafter="context-stop"
+              oncommand="adhighlighter.onMenuItemCommand(event)"/>
+  </popup>
+  <script type='application/x-javascript' src='chrome://adhighlighter/content/xmlhttprequester.js'></script>
+  <script type='application/x-javascript' src='chrome://adhighlighter/content/prefman.js'></script>
+  <script type='application/x-javascript' src='chrome://adhighlighter/content/script-compiler.js'></script>
+  <script type='application/x-javascript' src='chrome://adhighlighter/content/semtools.js'></script>
+
+  <statusbar id="status-bar">
+  	<statusbarpanel id="adhighlighter-status" insertafter="livemark-button">
+  		<image id="adhighlighter-status-image" width="17" height="16" style="margin:0 5px">
+  		</image>
+  		<image id="adcounter-status-image" width="16" height="16" style="margin:0 5px">
+  		</image>
+  		<image id="intselinks-status-image" width="17" height="17" style="margin:0 5px">
+  		</image>
+  	</statusbarpanel>
+  </statusbar>
+</overlay>
