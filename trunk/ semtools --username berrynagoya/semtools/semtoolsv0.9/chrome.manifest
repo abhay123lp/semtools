@@ -1,4 +1,0 @@
-content	adhighlighter	content/
-locale	adhighlighter	en-US	locale/en-US/
-skin	adhighlighter	classic/1.0	skin/
-overlay	chrome://browser/content/browser.xul	chrome://adhighlighter/content/firefoxOverlay.xul
