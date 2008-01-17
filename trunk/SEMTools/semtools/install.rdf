@@ -9,7 +9,7 @@
                    em:creator="Richard Berry"
                    em:description="Highlights text ads by colour based on companies in Google and Yahoo, adds other search engine links on each search engine's results page."
                    em:homepageURL="http://www.sidthemonkey.com/extensions/semtools/"
-                   em:updateURL="http://www.sidthemonkey.com/extensions/semtools/update/"
+                   em:updateURL=""
                    em:iconURL="chrome://adhighlighter/content/adhighlighter.jpg"
                    em:optionsURL="chrome://adhighlighter/content/options.xul"
                    em:aboutURL="chrome://adhighlighter/content/about.xul">
