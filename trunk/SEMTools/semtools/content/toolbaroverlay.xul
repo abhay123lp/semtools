@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<overlay id="menuoverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type='application/x-javascript' src='chrome://adhighlighter/content/semtools1.js'></script>
+  <script type='application/x-javascript' src='chrome://adhighlighter/content/toolbar-overlay.js'></script>
+  <script type='application/x-javascript' src='chrome://adhighlighter/content/prefManager.js'></script>
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="adhighlighter-strings" src="chrome://adhighlighter/locale/adhighlighter.properties"/>
+  </stringbundleset>
+  <menupopup id="menu_ToolsPopup">
+    <menuitem id="semtools-settings" label="adhighlighter.label;" 
+    					accesskey="semToolsSettings.accesskey;"
+              oncommand="showSEMToolsSettings();"/>
+  </menupopup>
+	<toolbox id = "navigator-toolbox">
+    <toolbar id="semtools-toolbar" toolbarname="SEM Tools Toolbar">
+      <toolbarbutton id="adcounter-status-image" label="Ad Counter"/>
+      <toolbarbutton id="adhighlighter-status-image" label="Ad Highlighter"/>
+      <toolbarbutton id="intselinks-status-image" label="SE Links"/>
+      <toolbarseparator/>
+    </toolbar>
+  </toolbox>
+</overlay>
