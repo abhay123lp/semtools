@@ -42,24 +42,24 @@ function loadStatusBar () {
 	var showAdHighlighterImage = document.getElementById("adhighlighter-status-image");
 	var showIntSELinksImage = document.getElementById("intselinks-status-image");
 
-	var statusbar = document.getElementById("status-bar");
+	//var statusbar = document.getElementById("status-bar");
 	if (getAdCounterStatus()){
-		showAdCounterImage.src = adCounterOnImage;
+		showAdCounterImage.image = adCounterOnImage;
 	}
 	else if (!getAdCounterStatus()){
-		showAdCounterImage.src = adCounterOffImage;
+		showAdCounterImage.image = adCounterOffImage;
 	}
 	if (getAdHighlighterStatus()){
-		showAdHighlighterImage.src = adHighlighterOnImage;
+		showAdHighlighterImage.image = adHighlighterOnImage;
 	}
 	else if (!getAdHighlighterStatus()){
-		showAdHighlighterImage.src = adHighlighterOffImage;
+		showAdHighlighterImage.image = adHighlighterOffImage;
 	}
 	if (getIntSELinksStatus()){
-		showIntSELinksImage.src = intSELinksOnImage;
+		showIntSELinksImage.image = intSELinksOnImage;
 	}
 	else if (!getIntSELinksStatus()){
-		showIntSELinksImage.src = intSELinksOffImage;
+		showIntSELinksImage.image = intSELinksOffImage;
 	}
 	showAdCounterImage.addEventListener("click",setAdCounter,false);
 	showAdHighlighterImage.addEventListener("click",setAdHighlighter,false);
@@ -69,10 +69,10 @@ function loadStatusBar () {
 function setAdCounter() {
 	var showAdCounterImage = document.getElementById("adcounter-status-image");
 	if (!getAdCounterStatus()){
-		showAdCounterImage.src = adCounterOnImage;
+		showAdCounterImage.image = adCounterOnImage;
 	}
 	else{
-		showAdCounterImage.src = adCounterOffImage;
+		showAdCounterImage.image = adCounterOffImage;
 	}	
 	setAdCounterStatus(!getAdCounterStatus());
 }
@@ -104,10 +104,10 @@ function setAdCounterStatus(status){
 function setAdHighlighter() {
 	var showAdHighlighterImage = document.getElementById("adhighlighter-status-image");
 	if (!getAdHighlighterStatus()){
-		showAdHighlighterImage.src = adHighlighterOnImage;
+		showAdHighlighterImage.image = adHighlighterOnImage;
 	}
 	else{
-		showAdHighlighterImage.src = adHighlighterOffImage;
+		showAdHighlighterImage.image = adHighlighterOffImage;
 	}	
 	setAdHighlighterStatus(!getAdHighlighterStatus());
 }
@@ -134,10 +134,10 @@ function setAdHighlighterStatus(status){
 function setIntSELinks() {
 	var showIntSELinksImage = document.getElementById("intselinks-status-image");
 	if (!getIntSELinksStatus()){
-		showIntSELinksImage.src = intSELinksOnImage;
+		showIntSELinksImage.image = intSELinksOnImage;
 	}
 	else{
-		showIntSELinksImage.src = intSELinksOffImage;
+		showIntSELinksImage.image = intSELinksOffImage;
 	}	
 	setIntSELinksStatus(!getIntSELinksStatus());
 }
