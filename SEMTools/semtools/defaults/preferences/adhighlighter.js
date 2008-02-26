@@ -293,6 +293,10 @@ pref("extensions.semtools.adhighlighter.adcompany27.colour", "");
 pref("extensions.semtools.adhighlighter.adcompany27.matchString", "");
 pref("extensions.semtools.adhighlighter.adcompany27.companyURL", "");
 
+
+//Decode URL preferences
+pref("extensions.semtools.adhighlighter.enableDecodeURL", false);
+
 /*
 var allAdCompanyPreferences = ["24/7 Real Media,TFSM,orange,(decideinteractive|decdna|pm14),http://www.247realmedia.com/",
 "Facilitate,Facilitate,pink,adsfac,http://www.facilitatedigital.com/",
