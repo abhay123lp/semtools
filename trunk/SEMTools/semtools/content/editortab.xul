@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<window xmlns:html="http://www.w3.org/1999/xhtml"	
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	title="Keyword Creator">
+	<script type='application/x-javascript' src='chrome://adhighlighter/content/editortab.js'></script>
+	<tabbox height = "300">
+		<tabs>
+			<tab label = "Joiner" linkedpanel = "keyword-joiner" />
+			<tab label = "Replacer" linkedpanel = "keyword-replacer" />
+		</tabs>
+		<tabpanels>
+			<tabpanel id = "keyword-joiner">
+				<vbox flex = "1" overflow="moz-scrollbars-vertical"  height = "300">
+					<description>Enter words to join here:</description>
+					<hbox flex = "1" overflow="moz-scrollbars-vertical" height = "50">
+						<textbox multiline="true" rows="40" id="textbox-one">
+						</textbox>
+						<textbox multiline="true" rows="40" id="textbox-two"/>
+						<vbox>
+							<radiogroup id="join-type-selection">
+								<radio label = "Broad Match" value = "broad" selected = "true"/>
+								<radio label = "Phrase Match" value = "phrase"/>
+								<radio label = "Exact Match" value = "exact"/>
+							</radiogroup>
+							<checkbox label = "Negative Match" value = "negative" id = "negative-checkbox"/>
+							<button label = "Join Keywords" height = "10" id = "join-keywords-button">
+							</button>
+						</vbox>
+					</hbox>
+					<vbox overflow="moz-scrollbars-vertical" height = "100" width = "50">
+						<description>Results:</description>
+						<textbox multiline="true" rows="10" id="results-textbox"/>
+					</vbox>
+					<button label = "Clear Fields" height = "10" width = "20" id = "clear-fields-button">
+					</button>
+				</vbox>
+			</tabpanel>
+			<tabpanel id = "keyword-replacer">
+			<colorpicker/>
+			<colorpicker/>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</window>

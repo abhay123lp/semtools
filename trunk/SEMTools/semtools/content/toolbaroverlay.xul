@@ -18,6 +18,7 @@
       <toolbarbutton id="decodeurl-status-image" label="Decode URL"/>
       <toolbarbutton id="intselinks-status-image" label="SE Links"/>
       <toolbarseparator/>
+      <toolbarbutton id="editortab-open" label="Keyword Creator"/>
     </toolbar>
   </toolbox>
 </overlay>
