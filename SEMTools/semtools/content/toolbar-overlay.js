@@ -53,7 +53,7 @@ function loadStatusBar () {
 	var showAdHighlighterImage = document.getElementById("adhighlighter-status-image");
 	var showIntSELinksImage = document.getElementById("intselinks-status-image");
 	var decodeURLImage = document.getElementById("decodeurl-status-image");
-
+	var editorTabOpen = document.getElementById("editortab-open");
 	//var statusbar = document.getElementById("status-bar");
 	if (getAdCounterStatus()){
 		showAdCounterImage.image = adCounterOnImage;
@@ -68,10 +68,14 @@ function loadStatusBar () {
 		showAdHighlighterImage.image = adHighlighterOffImage;
 	}
 	if (getDecodeURLStatus()){
-		decodeURLImage.image = decodeURLOnImage;
+		decodeURLImage.image = decodeURLOffImage;
+		//content.document.defaultView.alert ("match");
+		decodeURLImage.disabled = false;
 	}
 	else if (!getDecodeURLStatus()){
 		decodeURLImage.image = decodeURLOffImage;
+		//alert ("No Match");
+		decodeURLImage.disabled = true;
 	}
 	if (getIntSELinksStatus()){
 		showIntSELinksImage.image = intSELinksOnImage;
@@ -81,8 +85,14 @@ function loadStatusBar () {
 	}
 	showAdCounterImage.addEventListener("click",setAdCounter,false);
 	showAdHighlighterImage.addEventListener("click",setAdHighlighter,false);
-	decodeURLImage.addEventListener("click",setDecodeURL,false);
+	if (decodeURLImage.disabled == false){
+		decodeURLImage.addEventListener("click",setDecodeURL,false);
+	}
+	else {
+		decodeURLImage.removeEventListener("click",setDecodeURL,false);
+	}
 	showIntSELinksImage.addEventListener("click",setIntSELinks,false);
+	editorTabOpen.addEventListener("click",openEditorTab,false);
 }
 
 function setAdCounter() {
@@ -152,25 +162,40 @@ function setAdHighlighterStatus(status){
 
 function setDecodeURL() {
 	var decodeURLImage = document.getElementById("decodeurl-status-image");
-	if (!getDecodeURLStatus()){
+	if (decodeURLImage.image == decodeURLOffImage){
 		decodeURLImage.image = decodeURLOnImage;
+		setDecodeURLStatus(true);
 	}
 	else{
 		decodeURLImage.image = decodeURLOffImage;
+		setDecodeURLStatus(false);
 	}	
-	setDecodeURLStatus(!getDecodeURLStatus());
+	//setDecodeURLStatus(!getDecodeURLStatus());
 }
 
 function getDecodeURLStatus(){
-  var pref = new semtools_PrefManager();
-	decodeURLStatus = pref.getValue("adhighlighter.enableDecodeURL");
+	var currentPageURL = content.document.defaultView.location.href;
+	var currentPageURLString = String(currentPageURL);
+	//var yahooMatchString = "search.yahoo";	//Test for Yahoo US, Yahoo AU, Yahoo UK, Yahoo TW
+	//var baiduMatchString = "baidu"; //Test for Baidu
+	//var yahooCNMatchString = "search.cn.yahoo"; //Test for Yahoo CN
+	var matchingPages = "search\.yahoo|baidu|search\.cn\.yahoo";
+	var matchingPagesRegEx = new RegExp(matchingPages);
+	if (currentPageURLString.match(matchingPagesRegEx)){
+		var decodeURLStatus = true;
+	}
+	else {
+		var decodeURLStatus = false;
+	}
+  //var pref = new semtools_PrefManager();
+	//decodeURLStatus = pref.getValue("adhighlighter.enableDecodeURL");
 	return decodeURLStatus;
 }
 
 function setDecodeURLStatus(status){
-	var pref = new semtools_PrefManager();
-	decodeURLStatus = pref.setValue("adhighlighter.enableDecodeURL", status);
-	decodeURLStatus = status;
+	//var pref = new semtools_PrefManager();
+	//decodeURLStatus = pref.setValue("adhighlighter.enableDecodeURL", status);
+	//decodeURLStatus = status;
 	var decodeURLImage = document.getElementById("decodeurl-status-image");
 	if (status){
 		decodeURLImage.oldImage = decodeURLImage.image;
@@ -183,6 +208,10 @@ function setDecodeURLStatus(status){
 	}
 }
 
+function openEditorTab (){
+	editorTabchromeURL = "chrome://adhighlighter/content/editortab.xul";
+	gBrowser.selectedTab = gBrowser.addTab(editorTabchromeURL);
+}
 
 function setIntSELinks() {
 	var showIntSELinksImage = document.getElementById("intselinks-status-image");
@@ -365,7 +394,11 @@ function adHighlighter ( enableAdHighlighter, enableAdCounter, adProvider ) {
 					//Check if enableAdHighlighter is set to true
 					if (enableAdHighlighter)
 					{
-						thisLink.style.color = adProvider[x][2];
+						thisLink.style.color = adProvider[x][2] + " ! important";
+						//Baidu hack to override red font
+						if (thisLink.firstChild.lastChild){
+						thisLink.firstChild.lastChild.color = adProvider[x][2];
+						}
 						thisLink.title = adProvider[x][1];
 						//Should the display title be the display name or proper name? Probably display name as it matches the ad counter
 					}

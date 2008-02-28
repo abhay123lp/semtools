@@ -9,7 +9,6 @@ function decodeURL () {
 	if (currentPageURLString.match(yahooMatchString)){
 		var xPath = "//a[contains(translate(@href, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), translate('overture.com/', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'))]";
 		searchService = "all";
-		//alert (searchService);
 	}
 	else if (currentPageURLString.match(baiduMatchString)){
 		var xPath = "//a[contains(@href, 'http://www.baidu.com/baidu.php?url=')]";
@@ -32,7 +31,6 @@ function decodeURL () {
 	   	null,
 	   	XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
 	   	null);
-	   	//alert (allLinks.snapshotLength);
 	  for (var i = 0; i < allLinks.snapshotLength; i++) {
 	   	thisLink = allLinks.snapshotItem(i);
 	   	var counter = 0;
@@ -61,17 +59,12 @@ function webSnifferIt(targetURL, originalURL, counter, searchService, numOfResul
   var regExpTestTwo = 'This link is not authorized by Yahoo';
   var regExpTestThree = 'YahooCN Redirector';
   regExpTestOne = new RegExp(regExpTestOne);
-	//alert (requestURL);
   var req = new XMLHttpRequest();
 	req.open('GET', requestURL, true);
 	req.onreadystatechange = function (aEvt) {
   if (req.readyState == 4) {
     if(req.status == 200){
       resultsPage = req.responseText;
-      if (counter == 0){
-      	//content.document.write(resultsPage);
-      	//LOG (resultsPage);
-      }
       if ((resultsPage.search(regExpTestOne)) > 0){
       	var webSnifferURLLocation = 'examine location target.*';
   			var webSnifferURLLocationPre = 'examine location target" href="/?url=';
@@ -80,9 +73,7 @@ function webSnifferIt(targetURL, originalURL, counter, searchService, numOfResul
   			var matchResult = webSnifferRegExp.exec(resultsPage);
   			matchResult = matchResult.toString().replace(webSnifferURLLocationPre, "");
   			matchResult = matchResult.toString().replace(/\<\/a\>.*/, "");
-  			matchResult = matchResult.toString().replace(/\&amp\;.*/, "");
-  					//alert (matchResult);
-  			
+  			matchResult = matchResult.toString().replace(/\&amp\;.*/, "");  			
       }
       else if ((resultsPage.search(regExpTestTwo)) > 0){
         webSnifferURLLocation = 'http\:\/\/rc12\.overture\.com.*here';
@@ -91,7 +82,6 @@ function webSnifferIt(targetURL, originalURL, counter, searchService, numOfResul
   			var matchResult = webSnifferRegExp.exec(resultsPage);
       }
       else if ((resultsPage.search(regExpTestThree)) > 0){
-      	//alert ("MAtching");
        	var webSnifferURLLocationPre = 'body onload="redirect(';
   			var webSnifferURLLocationPost = ')"';
        	var webSnifferURLLocationQuotes = "'";
@@ -102,7 +92,6 @@ function webSnifferIt(targetURL, originalURL, counter, searchService, numOfResul
   			matchResult = matchResult.toString().replace(webSnifferURLLocationPost, "");
   			matchResult = matchResult.toString().replace(webSnifferURLLocationQuotes, "");
   			matchResult = matchResult.toString().replace(webSnifferURLLocationQuotes, "");
-  			//alert (matchResult);
   			counter = counter + 1;
       }
       else {
@@ -110,11 +99,9 @@ function webSnifferIt(targetURL, originalURL, counter, searchService, numOfResul
       	//The page couldn't be scraped using the current scraper
       	//alert ("This page (" + requestURL + ")doesn't have any code written to scrape it:" + resultsPage)
       }
-      //alert (searchService);
       if (searchService == "baidu"){
 		    if (counter == 0){
 		    	matchResult = "http://www.baidu.com" + matchResult;
-		    	//alert (matchResult);
 		    }
 	    }
       counter = counter + 1;
