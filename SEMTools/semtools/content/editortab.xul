@@ -23,7 +23,7 @@
 								<radio label = "Phrase Match" value = "phrase"/>
 								<radio label = "Exact Match" value = "exact"/>
 							</radiogroup>
-							<checkbox label = "Negative Match" value = "negative" id = "negative-checkbox"/>
+							<checkbox label = "Negative Match" checked = "false" id = "negative-checkbox"/>
 							<button label = "Join Keywords" height = "10" id = "join-keywords-button">
 							</button>
 						</vbox>
@@ -37,8 +37,26 @@
 				</vbox>
 			</tabpanel>
 			<tabpanel id = "keyword-replacer">
-			<colorpicker/>
-			<colorpicker/>
+				<vbox flex = "1" overflow="moz-scrollbars-vertical"  height = "300">
+					<description>Enter words to replace here:</description>
+					<hbox flex = "1" overflow="moz-scrollbars-vertical" height = "50">
+						<textbox multiline="true" rows="40" id="replace-textbox-one">
+						</textbox>
+						<textbox multiline="true" rows="40" id="replace-textbox-two"/>
+						<vbox>
+							<checkbox label = "Global Match" symbol = "g" id = "global-match-checkbox" checked = "true"/>
+							<checkbox label = "Ignore Case" symbol = "i" id = "ignore-case-checkbox" checked = "true"/>
+							<button label = "Replace" height = "10" id = "replace-button">
+							</button>
+						</vbox>
+					</hbox>
+					<vbox overflow="moz-scrollbars-vertical" height = "100" width = "50">
+						<description>Results:</description>
+						<textbox multiline="true" rows="10" id="replacer-results-textbox"/>
+					</vbox>
+					<button label = "Clear Fields" height = "10" width = "20" id = "clear-replacer-fields-button">
+					</button>
+				</vbox>
 			</tabpanel>
 		</tabpanels>
 	</tabbox>
