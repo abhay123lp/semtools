@@ -3,6 +3,7 @@ window.addEventListener("load", loadAllTabs, true);
 function loadAllTabs () {
 	loadKeywordCreator ()
 	loadKeywordReplacer ()
+	loadKeywordGrouper ()
 }
 
 function loadKeywordCreator (){
@@ -29,6 +30,76 @@ function loadKeywordReplacer () {
 	clearFieldsButton.addEventListener("click", function () {clearAllFields("replace-textbox-one", "replace-textbox-two", "replacer-results-textbox");}, false);
 }
 
+function loadKeywordGrouper () {
+	var groupKeywordsButton = document.getElementById("group-button");
+	var textBoxOne = document.getElementById("group-textbox-one");
+	var textBoxTwo = document.getElementById("group-textbox-two");
+	var resultsTextbox = document.getElementById("grouper-results-textbox");
+	var clearFieldsButton = document.getElementById("clear-grouper-fields-button");
+	groupKeywordsButton.addEventListener("click", function () {groupKeywords(textBoxOne.value, textBoxTwo.value);}, false);
+	clearFieldsButton.addEventListener("click", function () {clearAllFields("group-textbox-one", "group-textbox-two", "grouper-results-textbox");}, false);
+}
+
+function groupKeywords (firstSet, secondSet) {
+	var arrays = [firstSet, secondSet];
+	for (var i = 0; i < arrays.length; i++){
+		var thisArray = arrays[i].replace(/\n\n/g, "\n");
+		while (thisArray.match(/\n\n/g)){
+			thisArray = thisArray.replace(/\n\n/g, "\n");
+		}
+		var returnArray = [];
+		returnArray = thisArray.split(/\n/g);
+		returnArray.reverse();
+		for (var j = 0; j < returnArray.length; j++){
+			returnArray[j] = returnArray[j].trim();
+			if (returnArray[j].match(/^$/)){
+				returnArray.splice(j,1);
+			}
+		}
+		returnArray.reverse();
+		thisArray = returnArray;
+		arrays[i] = thisArray;
+	}
+	var result = groupArrays (arrays[0], arrays[1]);
+	var finalResult = result[0];
+	var remainingWords = result[1];
+	remainingWords = remainingWords.join("\n");
+	var remainderTextbox = document.getElementById("grouper-remainder-textbox");
+	remainderTextbox.value = remainingWords;
+	finalResult = finalResult.join("\n");
+	var resultsTextbox = document.getElementById("grouper-results-textbox");
+	resultsTextbox.value = finalResult;
+	resultsTextbox.select();
+}
+
+function groupArrays (firstArray, secondArray){
+	var regExOptions = "gi";
+	var finalResult = [];
+	var joiner = "\t";
+	for (var i = 0; i < firstArray.length; i++){
+		var firstWord = firstArray[i];
+		for (var j = 0; j < secondArray.length; j++){
+			secondWord = secondArray[j].split("\t")
+			var regEx = new RegExp(secondWord[0], regExOptions);
+			var group = secondWord[1];
+			if (group == undefined){
+				replacer = "";
+			}
+			if (firstWord.match(regEx)){
+							//alert (firstWord);
+			
+				firstWord = group + joiner + firstWord;
+				finalResult.push(firstWord);
+				firstArray.splice((i),1);
+				//alert (firstArray[i]);
+				i = i - 1;
+				break;
+			}
+		}
+	}
+	return [finalResult, firstArray];
+}
+
 function replaceKeywords (firstSet, secondSet) {
 	var globalMatch = document.getElementById("global-match-checkbox");
 	var ignoreCase = document.getElementById("ignore-case-checkbox");
@@ -47,12 +118,20 @@ function replaceKeywords (firstSet, secondSet) {
 	var regExOptions = regExGlobal + regExCase;
 	var arrays = [firstSet, secondSet];
 	for (var i = 0; i < arrays.length; i++){
-		var thisArray = arrays[i];
+		var thisArray = arrays[i].replace(/\n\n/g, "\n");
+		while (thisArray.match(/\n\n/g)){
+			thisArray = thisArray.replace(/\n\n/g, "\n");
+		}
 		var returnArray = [];
 		returnArray = thisArray.split(/\n/g);
+		returnArray.reverse();
 		for (var j = 0; j < returnArray.length; j++){
 			returnArray[j] = returnArray[j].trim();
+			if (returnArray[j].match(/^$/)){
+				returnArray.splice(j,1);
+			}
 		}
+		returnArray.reverse();
 		thisArray = returnArray;
 		arrays[i] = thisArray;
 	}
@@ -71,6 +150,9 @@ function replaceArrays (firstArray, secondArray, regExOptions) {
 			secondWord = secondArray[j].split("\t")
 			var regEx = new RegExp(secondWord[0], regExOptions);
 			var replacer = secondWord[1];
+			if (replacer == undefined){
+				replacer = "";
+			}
 			firstWord = firstWord.replace(regEx, replacer);
 		}
 		finalResult.push(firstWord);

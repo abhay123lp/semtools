@@ -8,6 +8,7 @@
 		<tabs>
 			<tab label = "Joiner" linkedpanel = "keyword-joiner" />
 			<tab label = "Replacer" linkedpanel = "keyword-replacer" />
+			<tab label = "Grouper" linkedpanel = "keyword-grouper" />
 		</tabs>
 		<tabpanels>
 			<tabpanel id = "keyword-joiner">
@@ -55,6 +56,36 @@
 						<textbox multiline="true" rows="10" id="replacer-results-textbox"/>
 					</vbox>
 					<button label = "Clear Fields" height = "10" width = "20" id = "clear-replacer-fields-button">
+					</button>
+				</vbox>
+			</tabpanel>
+			<tabpanel id = "keyword-joiner">
+				<vbox flex = "1" overflow="moz-scrollbars-vertical"  height = "300">
+					<hbox flex = "1" overflow="moz-scrollbars-vertical" height = "50">
+						<vbox>
+							<description>Enter words to group here:</description>
+							<textbox multiline="true" rows="10" id="group-textbox-one"/>
+						</vbox>
+						<vbox>
+							<description>Enter matches and groups here:</description>
+							<textbox multiline="true" rows="10" id="group-textbox-two"/>
+						</vbox>
+						<vbox>
+							<button label = "Group" height = "10" id = "group-button">
+							</button>
+						</vbox>
+					</hbox>
+					<hbox overflow="moz-scrollbars-vertical" height = "100" width = "50">
+						<vbox>
+							<description>Results:</description>
+							<textbox multiline="true" rows="9" id="grouper-results-textbox"/>
+						</vbox>
+						<vbox>
+							<description>Remaining Keywords:</description>
+							<textbox multiline="true" rows="9" id="grouper-remainder-textbox"/>
+						</vbox>
+					</hbox>
+					<button label = "Clear Fields" height = "10" width = "20" id = "clear-grouper-fields-button">
 					</button>
 				</vbox>
 			</tabpanel>
