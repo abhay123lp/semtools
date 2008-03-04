@@ -1,21 +1,21 @@
 
 //Set the two images for on and off for the adcounter
-var adCounterOnImage = "chrome://adhighlighter/content/adcounter_status_on.gif";
-var adCounterOffImage = "chrome://adhighlighter/content/adcounter_status_off.gif";
+var adCounterOnImage = "chrome://adhighlighter/content/resources/adcounter_status_on.gif";
+var adCounterOffImage = "chrome://adhighlighter/content/resources/adcounter_status_off.gif";
 
 //Set the two images for on and off for the adhighlighter
-var adHighlighterOnImage = "chrome://adhighlighter/content/adhighlighter_status_on.gif";
-var adHighlighterOffImage = "chrome://adhighlighter/content/adhighlighter_status_off.gif";
+var adHighlighterOnImage = "chrome://adhighlighter/content/resources/adhighlighter_status_on.gif";
+var adHighlighterOffImage = "chrome://adhighlighter/content/resources/adhighlighter_status_off.gif";
 
 //Set the two images for on and off for urldecoder
-var decodeURLOnImage = "chrome://adhighlighter/content/decodeurl_status_on.gif";
+var decodeURLOnImage = "chrome://adhighlighter/content/resources/decodeurl_status_on.gif";
 var decodeURLRunImage = "chrome://global/skin/throbber/Throbber-small.gif";
-//var decodeURLRunImage = "chrome://adhighlighter/content/loading-image.gif";
-var decodeURLOffImage = "chrome://adhighlighter/content/decodeurl_status_off.gif";
+//var decodeURLRunImage = "chrome://adhighlighter/content/resources/loading-image.gif";
+var decodeURLOffImage = "chrome://adhighlighter/content/resources/decodeurl_status_off.gif";
 
 //Set the two images for on and off for intselinks
-var intSELinksOnImage = "chrome://adhighlighter/content/intselinks_status_on.gif";
-var intSELinksOffImage = "chrome://adhighlighter/content/intselinks_status_off.gif";
+var intSELinksOnImage = "chrome://adhighlighter/content/resources/intselinks_status_on.gif";
+var intSELinksOffImage = "chrome://adhighlighter/content/resources/intselinks_status_off.gif";
 
 window.addEventListener("load", loadSEMTools, true);
 

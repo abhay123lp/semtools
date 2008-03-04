@@ -3,7 +3,7 @@
 <!DOCTYPE prefwindow SYSTEM "chrome://adhighlighter/locale/prefwindow.dtd">
 <prefwindow id="adhighlighterPreferences" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&prefwindow.title;" style="max-width: 640px;">
 
- <prefpane id="pane1" label="&pane1.title;" image="chrome://adhighlighter/content/adhighlighter-icon.png">
+ <prefpane id="pane1" label="&pane1.title;" image="chrome://adhighlighter/content/resources/adhighlighter-icon.png">
   <preferences id="adhighlighter-preferences">
  	<preference id="adhighlighter.showAdCounter" name="extensions.semtools.adhighlighter.showAdCounter" type="bool"/>
   <preference id="adhighlighter.enableAdHighlighter" name="extensions.semtools.adhighlighter.enableAdHighlighter" type="bool"/>
@@ -69,7 +69,7 @@
 	</groupbox>
  </prefpane> 
 
- <prefpane id="pane2" label="&pane2.title;" image="chrome://adhighlighter/content/intselinks-icon.png">
+ <prefpane id="pane2" label="&pane2.title;" image="chrome://adhighlighter/content/resources/intselinks-icon.png">
     <preferences id="intselinks-preferences">
       <preference id="selinks.enableSearchEngineLinks" name="extensions.semtools.selinks.enableSearchEngineLinks" type="bool"/>
       <preference id="selinks.includeList" name="extensions.semtools.selinks.includeList" type="string"/>
