@@ -23,3 +23,5 @@
 <!ENTITY queryParameter.label "Query Parameter">
 <!ENTITY urlFormat.label "URL Format">
 <!ENTITY spaceSeperator.label "Space Seperator">
+<!ENTITY add-button.label "Add">
+<!ENTITY delete-button.label "Delete">

@@ -1,61 +1,62 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://adhighlighter/locale/editortab.dtd">
 <window xmlns:html="http://www.w3.org/1999/xhtml"	
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-	title="Keyword Creator">
+	title="&editor-tab-window.label;">
 	<script type='application/x-javascript' src='chrome://adhighlighter/content/editortab.js'></script>
-	<tabbox height = "300">
-		<tabs>
-			<tab label = "Joiner" linkedpanel = "keyword-joiner" />
-			<tab label = "Replacer" linkedpanel = "keyword-replacer" />
-			<tab label = "Grouper" linkedpanel = "keyword-grouper" />
+	<tabbox id="tabbox" height = "300">
+		<tabs id="tabs">
+			<tab id="keyword-joiner-tab" label="&keyword-joiner.label;" linkedpanel="keyword-joiner" />
+			<tab id="keyword-replacer-tab" label="&keyword-replacer.label;" linkedpanel="keyword-replacer" />
+			<tab id="keyword-grouper-tab" label="&keyword-grouper.label;" linkedpanel="keyword-grouper" />
 		</tabs>
-		<tabpanels>
+		<tabpanels id="tabpanels">
 			<tabpanel id = "keyword-joiner">
 				<vbox flex = "1" overflow="moz-scrollbars-vertical"  height = "300">
-					<description>Enter words to join here:</description>
+					<description>&join-words.description;</description>
 					<hbox flex = "1" overflow="moz-scrollbars-vertical" height = "50">
 						<textbox multiline="true" rows="40" id="textbox-one">
 						</textbox>
 						<textbox multiline="true" rows="40" id="textbox-two"/>
 						<vbox>
 							<radiogroup id="join-type-selection">
-								<radio label = "Broad Match" value = "broad" selected = "true"/>
-								<radio label = "Phrase Match" value = "phrase"/>
-								<radio label = "Exact Match" value = "exact"/>
+								<radio label = "&broad-match.label;" value = "broad" selected = "true"/>
+								<radio label = "&phrase-match.label;" value = "phrase"/>
+								<radio label = "&exact-match.label;" value = "exact"/>
 							</radiogroup>
-							<checkbox label = "Negative Match" checked = "false" id = "negative-checkbox"/>
-							<button label = "Join Keywords" height = "10" id = "join-keywords-button">
+							<checkbox label = "&negative-match.label;" checked = "false" id = "negative-checkbox"/>
+							<button label = "&join-keywords-button.label;" height = "10" id = "join-keywords-button">
 							</button>
 						</vbox>
 					</hbox>
 					<vbox overflow="moz-scrollbars-vertical" height = "100" width = "50">
-						<description>Results:</description>
+						<description>&results.description;</description>
 						<textbox multiline="true" rows="10" id="results-textbox"/>
 					</vbox>
-					<button label = "Clear Fields" height = "10" width = "20" id = "clear-fields-button">
+					<button label = "&clear-fields-button.label;" height = "10" width = "20" id = "clear-fields-button">
 					</button>
 				</vbox>
 			</tabpanel>
 			<tabpanel id = "keyword-replacer">
 				<vbox flex = "1" overflow="moz-scrollbars-vertical"  height = "300">
-					<description>Enter words to replace here:</description>
+					<description>&replace-words.description;</description>
 					<hbox flex = "1" overflow="moz-scrollbars-vertical" height = "50">
 						<textbox multiline="true" rows="40" id="replace-textbox-one">
 						</textbox>
 						<textbox multiline="true" rows="40" id="replace-textbox-two"/>
 						<vbox>
-							<checkbox label = "Global Match" symbol = "g" id = "global-match-checkbox" checked = "true"/>
-							<checkbox label = "Ignore Case" symbol = "i" id = "ignore-case-checkbox" checked = "true"/>
-							<button label = "Replace" height = "10" id = "replace-button">
+							<checkbox label = "&global-match.label;" symbol = "g" id = "global-match-checkbox" checked = "true"/>
+							<checkbox label = "&ignore-case.label;" symbol = "i" id = "ignore-case-checkbox" checked = "true"/>
+							<button label = "&replace-button.label;" height = "10" id = "replace-button">
 							</button>
 						</vbox>
 					</hbox>
 					<vbox overflow="moz-scrollbars-vertical" height = "100" width = "50">
-						<description>Results:</description>
+						<description>&results.description;</description>
 						<textbox multiline="true" rows="10" id="replacer-results-textbox"/>
 					</vbox>
-					<button label = "Clear Fields" height = "10" width = "20" id = "clear-replacer-fields-button">
+					<button label = "&clear-fields-button.label;" height = "10" width = "20" id = "clear-replacer-fields-button">
 					</button>
 				</vbox>
 			</tabpanel>
@@ -63,29 +64,29 @@
 				<vbox flex = "1" overflow="moz-scrollbars-vertical"  height = "300">
 					<hbox flex = "1" overflow="moz-scrollbars-vertical" height = "50">
 						<vbox>
-							<description>Enter words to group here:</description>
+							<description>&group-words.description;</description>
 							<textbox multiline="true" rows="10" id="group-textbox-one"/>
 						</vbox>
 						<vbox>
-							<description>Enter matches and groups here:</description>
+							<description>&match-words.description;</description>
 							<textbox multiline="true" rows="10" id="group-textbox-two"/>
 						</vbox>
 						<vbox>
-							<button label = "Group" height = "10" id = "group-button">
+							<button label = "&group-keywords-button.label;" height = "10" id = "group-button">
 							</button>
 						</vbox>
 					</hbox>
 					<hbox overflow="moz-scrollbars-vertical" height = "100" width = "50">
 						<vbox>
-							<description>Results:</description>
+							<description>&results.description;</description>
 							<textbox multiline="true" rows="9" id="grouper-results-textbox"/>
 						</vbox>
 						<vbox>
-							<description>Remaining Keywords:</description>
+							<description>&grouper-remainder.description;</description>
 							<textbox multiline="true" rows="9" id="grouper-remainder-textbox"/>
 						</vbox>
 					</hbox>
-					<button label = "Clear Fields" height = "10" width = "20" id = "clear-grouper-fields-button">
+					<button label = "&clear-fields-button.label;" height = "10" width = "20" id = "clear-grouper-fields-button">
 					</button>
 				</vbox>
 			</tabpanel>

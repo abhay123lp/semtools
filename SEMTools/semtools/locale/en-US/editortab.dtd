@@ -1,0 +1,20 @@
+<!ENTITY editor-tab-window.label "Keyword Creator">
+<!ENTITY keyword-joiner.label "Joiner">
+<!ENTITY keyword-replacer.label "Replacer">
+<!ENTITY keyword-grouper.label "Grouper">
+<!ENTITY join-words.description "Enter words to join here:">
+<!ENTITY broad-match.label "Broad Match">
+<!ENTITY phrase-match.label "Phrase Match">
+<!ENTITY exact-match.label "Exact Match">
+<!ENTITY negative-match.label "Negative Match">
+<!ENTITY join-keywords-button.label "Join Keywords">
+<!ENTITY results.description "Results:">
+<!ENTITY clear-fields-button.label "Clear Fields">
+<!ENTITY replace-words.description "Enter words to replace here:">
+<!ENTITY global-match.label "Global Match">
+<!ENTITY ignore-case.label "Ignore Case">
+<!ENTITY replace-button.label "Replace">
+<!ENTITY group-words.description "Enter words to group here:">
+<!ENTITY match-words.description "Enter matches and groups here:">
+<!ENTITY group-keywords-button.label "Group">
+<!ENTITY grouper-remainder.description "Remaining Keywords:">
