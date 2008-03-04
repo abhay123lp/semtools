@@ -27,8 +27,8 @@
 	    </listhead>
 	   </listbox>
 	   <hbox>
-			<button id="adhighlighter-add-button" label="Add"/>
-			<button id="adhighlighter-delete-button" label="Delete"/>
+			<button id="adhighlighter-add-button" label="&add-button.label;"/>
+			<button id="adhighlighter-delete-button" label="&delete-button.label;"/>
 		 </hbox>
 		</vbox>
 		<vbox>
@@ -90,8 +90,8 @@
 	    </listhead>
 	   </listbox>
 	   <hbox>
-			<button id="selinks-add-button" label="Add"/>
-			<button id="selinks-delete-button" label="Delete"/>
+			<button id="selinks-add-button" label="&add-button.label;"/>
+			<button id="selinks-delete-button" label="&delete-button.label;"/>
 		 </hbox>
 		</vbox>
 		<vbox>

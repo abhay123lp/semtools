@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE overlay SYSTEM "chrome://adhighlighter/locale/adhighlighter.dtd">
 <overlay id="menuoverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type='application/x-javascript' src='chrome://adhighlighter/content/toolbar-overlay.js'></script>
   <script type='application/x-javascript' src='chrome://adhighlighter/content/prefManager.js'></script>
@@ -7,18 +8,18 @@
     <stringbundle id="adhighlighter-strings" src="chrome://adhighlighter/locale/adhighlighter.properties"/>
   </stringbundleset>
   <menupopup id="menu_ToolsPopup">
-    <menuitem id="semtools-settings" label="adhighlighter.label;" 
-    					accesskey="semToolsSettings.accesskey;"
+    <menuitem id="semtools-settings" label="&adhighlighter.label;" 
+    					accesskey="&semToolsSettings.accesskey;"
               oncommand="showSEMToolsSettings();"/>
   </menupopup>
 	<toolbox id = "navigator-toolbox">
-    <toolbar id="semtools-toolbar" toolbarname="SEM Tools Toolbar">
-      <toolbarbutton id="adcounter-status-image" label="Ad Counter"/>
-      <toolbarbutton id="adhighlighter-status-image" label="Ad Highlighter"/>
-      <toolbarbutton id="decodeurl-status-image" label="Decode URL"/>
-      <toolbarbutton id="intselinks-status-image" label="SE Links"/>
+    <toolbar id="semtools-toolbar" toolbarname="&semtools-toolbar.label;">
+      <toolbarbutton id="adcounter-status-image" label="&adcounter-status.label;"/>
+      <toolbarbutton id="adhighlighter-status-image" label="&adhighlighter-status.label;"/>
+      <toolbarbutton id="decodeurl-status-image" label="&decodeurl-status.label;"/>
+      <toolbarbutton id="intselinks-status-image" label="&intselinks-status.label;"/>
       <toolbarseparator/>
-      <toolbarbutton id="editortab-open" label="Keyword Creator"/>
+      <toolbarbutton id="editortab-open" label="&editortab.label;"/>
     </toolbar>
   </toolbox>
 </overlay>

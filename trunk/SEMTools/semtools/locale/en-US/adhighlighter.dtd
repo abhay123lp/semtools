@@ -1,4 +1,8 @@
 <!ENTITY adhighlighter.label "SEM Tools Options">
-<!ENTITY adhighlighterContext.label "SEM Tools Options">
-<!ENTITY adhighlighterContext.accesskey "Y">
 <!ENTITY semToolsSettings.accesskey "S">
+<!ENTITY semtools-toolbar.label "SEM Tools Toolbar">
+<!ENTITY adcounter-status.label "Ad Counter">
+<!ENTITY adhighlighter-status.label "Ad Highlighter">
+<!ENTITY decodeurl-status.label "Decode URL">
+<!ENTITY intselinks-status.label "SE Links">
+<!ENTITY editortab.label "Keyword Creator">
