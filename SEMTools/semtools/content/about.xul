@@ -6,7 +6,7 @@
 <groupbox align="center" orient="horizontal">
 <vbox>
   <text value="SEM Tools" style="font-weight: bold; font-size: x-large;"/>
-  <text value="&version; 0.90"/>
+  <text value="&version; 1.0.0"/>
   <separator class="thin"/>
   <text value="&createdBy;" style="font-weight: bold;"/>
   <text value="Sekizaru"/>
