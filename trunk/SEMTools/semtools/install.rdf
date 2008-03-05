@@ -5,9 +5,9 @@
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="adhighlighter@sidthemonkey.com"
                    em:name="SEM Tools"
-                   em:version="0.90"
+                   em:version="1.0.0"
                    em:creator="Richard Berry"
-                   em:description="Highlights text ads by colour based on companies in Google and Yahoo, adds other search engine links on each search engine's results page."
+                   em:description="Toolkit for the SEM or affiliate marketer"
                    em:homepageURL="http://www.sidthemonkey.com/extensions/semtools/"
                    em:iconURL="chrome://adhighlighter/content/resources/adhighlighter.jpg"
                    em:optionsURL="chrome://adhighlighter/content/options.xul"
@@ -17,5 +17,5 @@
   <RDF:Description RDF:about="rdf:#$.2hJQ1"
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="1.5"
-                   em:maxVersion="2.0.0.*" />
+                   em:maxVersion="3.0b3" />
 </RDF:RDF>
