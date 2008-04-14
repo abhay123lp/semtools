@@ -24,4 +24,7 @@
 // 0.80- Fixed "GM_getValue not defined" bug
 //		 - Linked menu to Options window
 // 0.90- Cleaned up code
+// 1.00- Moved buttons to a separate toolbar.
+//     - Added Keyword creation tools like join, replace and group.
+//     - Added URL Decoder that shows the destination URL of ads on sites like Yahoo and Baidu.
 // --------------------------------------------------------------------

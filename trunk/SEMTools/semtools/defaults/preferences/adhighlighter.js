@@ -132,7 +132,7 @@ pref("extensions.semtools.adhighlighter.excludeList", "mail,spreadsheets,gmodule
 
 
 pref("extensions.semtools.adhighlighter.adcompany1.companyName", "24/7 Real Media");
-pref("extensions.semtools.adhighlighter.adcompany1.displayName", "TFSM");
+pref("extensions.semtools.adhighlighter.adcompany1.displayName", "DecideDNA");
 pref("extensions.semtools.adhighlighter.adcompany1.colour", "orange");
 pref("extensions.semtools.adhighlighter.adcompany1.matchString", "(decideinteractive|decdna)");
 pref("extensions.semtools.adhighlighter.adcompany1.companyURL", "http://www.247realmedia.com/");
@@ -161,8 +161,8 @@ pref("extensions.semtools.adhighlighter.adcompany5.colour", "black");
 pref("extensions.semtools.adhighlighter.adcompany5.matchString", "zoomdirect");
 pref("extensions.semtools.adhighlighter.adcompany5.companyURL", "http://www.zoomdirect.com.au/");
 
-pref("extensions.semtools.adhighlighter.adcompany6.companyName", "DartSearch");
-pref("extensions.semtools.adhighlighter.adcompany6.displayName", "DartSearch");
+pref("extensions.semtools.adhighlighter.adcompany6.companyName", "DoubleClick");
+pref("extensions.semtools.adhighlighter.adcompany6.displayName", "DARTSearch");
 pref("extensions.semtools.adhighlighter.adcompany6.colour", "yellow");
 pref("extensions.semtools.adhighlighter.adcompany6.matchString", "dartsearch");
 pref("extensions.semtools.adhighlighter.adcompany6.companyURL", "http://www.doubleclick.com/products/dartsearch/index.aspx");
