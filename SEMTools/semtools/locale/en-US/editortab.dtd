@@ -2,6 +2,7 @@
 <!ENTITY keyword-joiner.label "Joiner">
 <!ENTITY keyword-replacer.label "Replacer">
 <!ENTITY keyword-grouper.label "Grouper">
+<!ENTITY keyword-cleaner.label "Cleaner">
 <!ENTITY join-words.description "Enter words to join here:">
 <!ENTITY broad-match.label "Broad Match">
 <!ENTITY phrase-match.label "Phrase Match">
@@ -18,3 +19,18 @@
 <!ENTITY match-words.description "Enter matches and groups here:">
 <!ENTITY group-keywords-button.label "Group">
 <!ENTITY grouper-remainder.description "Remaining Keywords:">
+<!ENTITY clean-up-words.description "Enter words to clean up here:">
+<!ENTITY clean-keywords-button.label "Clean">
+<!ENTITY bad-words-group-checkbox.label "Enable/Disable Bad Words">
+<!ENTITY remove-bad-words-radio.label "Remove Bad Words">
+<!ENTITY remove-bad-phrases-radio.label "Remove Phrases with Bad Words">
+<!ENTITY remove-numerals-checkbox.label "Remove Numerals">
+<!ENTITY remove-end-spaces-checkbox.label "Remove Trailing Spaces">
+<!ENTITY remove-double-spaces-checkbox.label "Remove Double Spaces">
+<!ENTITY remove-bad-characters-checkbox.label "Remove Punctuation and Symbols">
+<!ENTITY duplicate-words-group-checkbox.label "Enable/Disable Duplicate Remover">
+<!ENTITY remove-duplicate-words-radio.label "Remove Duplicates (no sort)">
+<!ENTITY remove-duplicate-words-sort-radio.label "Remove Duplicates (sort)">
+<!ENTITY saved-settings-groupbox.label "Saved Settings">
+
+
