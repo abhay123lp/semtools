@@ -5,7 +5,7 @@
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 	title="&editor-tab-window.label;">
 	<script type='application/x-javascript' src='chrome://adhighlighter/content/editortab.js'></script>
-	<tabbox id="tabbox" height = "300">
+	<tabbox id="tabbox">
 		<tabs id="tabs">
 			<tab id="keyword-joiner-tab" label="&keyword-joiner.label;" linkedpanel="keyword-joiner" />
 			<tab id="keyword-replacer-tab" label="&keyword-replacer.label;" linkedpanel="keyword-replacer" />
@@ -14,9 +14,9 @@
 		</tabs>
 		<tabpanels id="tabpanels">
 			<tabpanel id = "keyword-joiner">
-				<vbox flex = "1" overflow="moz-scrollbars-vertical"  height = "300">
+				<vbox flex = "0" overflow="moz-scrollbars-vertical"  height = "100">
 					<description>&join-words.description;</description>
-					<hbox flex = "1" overflow="moz-scrollbars-vertical" height = "50">
+					<hbox flex = "0" overflow="moz-scrollbars-vertical" height = "40">
 						<textbox multiline="true" rows="40" id="textbox-one">
 						</textbox>
 						<textbox multiline="true" rows="40" id="textbox-two"/>
@@ -31,7 +31,7 @@
 							</button>
 						</vbox>
 					</hbox>
-					<vbox overflow="moz-scrollbars-vertical" height = "100" width = "50">
+					<vbox overflow="moz-scrollbars-vertical" height = "50" width = "50">
 						<description>&results.description;</description>
 						<textbox multiline="true" rows="10" id="results-textbox"/>
 					</vbox>
@@ -40,9 +40,9 @@
 				</vbox>
 			</tabpanel>
 			<tabpanel id = "keyword-replacer">
-				<vbox flex = "1" overflow="moz-scrollbars-vertical"  height = "300">
+				<vbox flex = "0" overflow="moz-scrollbars-vertical"  height = "100">
 					<description>&replace-words.description;</description>
-					<hbox flex = "1" overflow="moz-scrollbars-vertical" height = "50">
+					<hbox flex = "0" overflow="moz-scrollbars-vertical" height = "50">
 						<textbox multiline="true" rows="40" id="replace-textbox-one">
 						</textbox>
 						<textbox multiline="true" rows="40" id="replace-textbox-two"/>
@@ -61,9 +61,9 @@
 					</button>
 				</vbox>
 			</tabpanel>
-			<tabpanel id = "keyword-joiner">
-				<vbox flex = "1" overflow="moz-scrollbars-vertical"  height = "300">
-					<hbox flex = "1" overflow="moz-scrollbars-vertical" height = "50">
+			<tabpanel id = "keyword-grouper">
+				<vbox flex = "0" overflow="moz-scrollbars-vertical"  height = "100">
+					<hbox flex = "0" overflow="moz-scrollbars-vertical" height = "50">
 						<vbox>
 							<description>&group-words.description;</description>
 							<textbox multiline="true" rows="10" id="group-textbox-one"/>
@@ -77,14 +77,14 @@
 							</button>
 						</vbox>
 					</hbox>
-					<hbox overflow="moz-scrollbars-vertical" height = "100" width = "50">
+					<hbox overflow="moz-scrollbars-vertical" height = "100">
 						<vbox>
 							<description>&results.description;</description>
-							<textbox multiline="true" rows="9" id="grouper-results-textbox"/>
+							<textbox multiline="true" rows="10" id="grouper-results-textbox"/>
 						</vbox>
 						<vbox>
 							<description>&grouper-remainder.description;</description>
-							<textbox multiline="true" rows="9" id="grouper-remainder-textbox"/>
+							<textbox multiline="true" rows="10" id="grouper-remainder-textbox"/>
 						</vbox>
 					</hbox>
 					<button label = "&clear-fields-button.label;" height = "10" width = "20" id = "clear-grouper-fields-button">
@@ -92,61 +92,101 @@
 				</vbox>
 			</tabpanel>
 			<tabpanel id = "keyword-cleaner">
-				<vbox flex = "1" overflow="moz-scrollbars-vertical"  height = "300">
-					<hbox flex = "1" overflow="moz-scrollbars-vertical" height = "50">
-						<vbox>
-							<description>&clean-up-words.description;</description>
-							<textbox multiline="true" rows="10" id="group-textbox-one"/>
-						</vbox>
-						<vbox>
-							<groupbox>
-								<groupbox>
-								  <caption>
-									<checkbox label="&bad-words-group-checkbox.label;"/>
-									</caption>
-									<radiogroup>
-										<radio id="remove-bad-words" label="&remove-bad-words-radio.label;"/>
-										<radio id="remove-bad-phrases" label="&remove-bad-phrases-radio.label;"/>
-									</radiogroup>
+				<vbox flex = "0" overflow="moz-scrollbars-vertical"  height = "100">
+					<hbox flex = "0" overflow="moz-scrollbars-vertical" height = "50">
+						<hbox>
+							<vbox>
+							<hbox>
+								<label value="&keyword-column-number.description;" control="keywordColumnNumber"/>
+								<textbox id="keywordColumnNumber" maxwidth="30" value="1"/>
+								<label value="&keyword-has-header.description;" control="keywordColumnNumber"/>
+								<checkbox id="keywordHasHeader" checked="true" label="&keyword-has-header.description;"/>
+							</hbox>
+							<hbox>
+							<vbox>
+								<description>&clean-up-words.description;</description>
+								<textbox multiline="true" rows="10" id="keywords-to-clean-textbox"/>
+							</vbox>
+							<vbox>
+								<description>&bad-words.description;</description>
+								<textbox multiline="true" rows="10" id="bad-words-textbox"/>
+							</vbox>
+							</hbox>
+							</vbox>
+							<vbox>
+								<groupbox id="actions-groupbox" orient="horizontal">
+									<caption label="&action-options-groupbox.label;"/>
+									<groupbox id="basic-actions-groupbox">
+									<checkbox id="to-lower-case" label="&to-lower-case-checkbox.label;"/>
+									<checkbox id="remove-numerals" label="&remove-numerals-checkbox.label;"/>
+									<checkbox id="remove-bad-characters" label="&remove-bad-characters-checkbox.label;"/>
+									<checkbox id="remove-end-spaces" label="&remove-end-spaces-checkbox.label;"/>
+									<checkbox id="remove-double-spaces" label="&remove-double-spaces-checkbox.label;"/>
+									</groupbox>
+	                <groupbox>
+	                  <caption>
+	                  <checkbox id="bad-words-group-checkbox" label="&bad-words-group-checkbox.label;"/>
+	                  </caption>
+	                  <radiogroup id="bad-words-group-radiogroup">
+	                    <radio id="remove-bad-words" label="&remove-bad-words-radio.label;" disabled="true" />
+	                    <radio id="remove-bad-phrases" label="&remove-bad-phrases-radio.label;" disabled="true" />
+	                  </radiogroup>
+	                  <hbox id="bad-words-run-group">
+	                  	<checkbox id="bad-words-run-first-checkbox" label="&bad-words-run-first-checkbox.label;" disabled="true"/>
+	                  	<checkbox id="bad-words-run-last-checkbox" label="&bad-words-run-last-checkbox.label;" disabled="true"/>
+	                  </hbox>
+	                </groupbox>
+	                <groupbox>
+	                  <caption>
+	                  <checkbox id="duplicate-group-checkbox" label="&duplicate-words-group-checkbox.label;"/>
+	                  </caption>
+	                  <radiogroup id="duplicate-group-radiogroup">
+	                    <radio id="remove-duplicate-words" label="&remove-duplicate-words-radio.label;" disabled="true" />
+	                    <radio id="remove-duplicate-words-ignore-case" label="&remove-duplicate-words-ignore-case-radio.label;" disabled="true" />
+	                    <checkbox id = "remove-all-duplicate-copies" label="&remove-all-duplicate-copies-checkbox.label;" disabled="true" />
+	                  </radiogroup>
+	                </groupbox>
+	                <groupbox>
+	                  <caption>
+	                  <checkbox id="sort-group-checkbox" label="&sort-group-checkbox.label;"/>
+	                  </caption>
+	                  <radiogroup id="sort-group-radiogroup">
+	                    <radio id="sort-ascending" label="&sort-ascending-radio.label;" disabled="true" />
+	                    <radio id="sort-descending" label="&sort-descending-radio.label;" disabled="true" />
+	                    <checkbox id = "ignore-case-for-sort" label="&ignore-case-for-sort-checkbox.label;" disabled="true" />
+	                  </radiogroup>
+	                </groupbox>
 								</groupbox>
-								<groupbox>
-								<checkbox id="remove-numerals" label="&remove-numerals-checkbox.label;"/>
-								<checkbox id="remove-end-spaces" label="&remove-end-spaces-checkbox.label;"/>
-								<checkbox id="remove-double-spaces" label="&remove-double-spaces-checkbox.label;"/>
-								<checkbox id="remove-bad-characters" label="&remove-bad-characters-checkbox.label;"/>
-								</groupbox>
-                <groupbox>
-                  <caption>
-                  <checkbox label="&duplicate-words-group-checkbox.label;"/>
-                  </caption>
-                  <radiogroup>
-                    <radio id="remove-duplicate-words" label="&remove-duplicate-words-radio.label;"/>
-                    <radio id="remove-duplicate-words-sort" label="&remove-duplicate-words-sort-radio.label;"/>
-                  </radiogroup>
-                </groupbox>
-							</groupbox>
-						</vbox>
-						<vbox>
-							<button label = "&clean-keywords-button.label;" height = "10" id = "clean-button">
-							</button>
-						</vbox>
+								<vbox>
+									<button label = "&clean-keywords-button.label;" height = "10" id = "clean-button">
+									</button>
+								</vbox>
+							</vbox>
+						</hbox>
 						<vbox>
 						  <groupbox>
 						    <caption label = "&saved-settings-groupbox.label;"/>
 						  </groupbox>
 						</vbox>
 					</hbox>
-					<hbox overflow="moz-scrollbars-vertical" height = "100" width = "50">
-						<vbox>
-							<description>&results.description;</description>
-							<textbox multiline="true" rows="9" id="grouper-results-textbox"/>
-						</vbox>
-						<vbox>
-							<description>&grouper-remainder.description;</description>
-							<textbox multiline="true" rows="9" id="grouper-remainder-textbox"/>
-						</vbox>
-					</hbox>
-					<button label = "&clear-fields-button.label;" height = "10" width = "20" id = "clear-grouper-fields-button">
+					<groupbox label="&results.description;">
+						<caption label = "&results.description;"/>
+						<hbox overflow="moz-scrollbars-vertical" height = "100" width = "50">
+							<vbox>
+								<description>&cleaned-list.description;</description>
+								<textbox multiline="true" rows="9" id="cleaner-cleaned-list-textbox"/>
+							</vbox>
+							<vbox>
+								<description>&duplicates.description;</description>
+								<textbox multiline="true" rows="9" id="cleaner-duplicates-textbox"/>
+							</vbox>
+							<vbox>
+								<description>&bad-phrases.description;</description>
+								<textbox multiline="true" rows="9" id="cleaner-bad-phrases-textbox"/>
+							</vbox>
+						</hbox>
+					</groupbox>
+					<button label = "&clear-fields-button.label;" height = "10" width = "20" id = "clear-cleaner-fields-button">
 					</button>
 				</vbox>
 			</tabpanel>
