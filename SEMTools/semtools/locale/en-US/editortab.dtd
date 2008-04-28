@@ -21,16 +21,30 @@
 <!ENTITY grouper-remainder.description "Remaining Keywords:">
 <!ENTITY clean-up-words.description "Enter words to clean up here:">
 <!ENTITY clean-keywords-button.label "Clean">
-<!ENTITY bad-words-group-checkbox.label "Enable/Disable Bad Words">
+<!ENTITY bad-words-group-checkbox.label "Remove Bad Words">
 <!ENTITY remove-bad-words-radio.label "Remove Bad Words">
 <!ENTITY remove-bad-phrases-radio.label "Remove Phrases with Bad Words">
 <!ENTITY remove-numerals-checkbox.label "Remove Numerals">
-<!ENTITY remove-end-spaces-checkbox.label "Remove Trailing Spaces">
+<!ENTITY remove-end-spaces-checkbox.label "Remove Leading and Trailing Spaces">
 <!ENTITY remove-double-spaces-checkbox.label "Remove Double Spaces">
 <!ENTITY remove-bad-characters-checkbox.label "Remove Punctuation and Symbols">
-<!ENTITY duplicate-words-group-checkbox.label "Enable/Disable Duplicate Remover">
-<!ENTITY remove-duplicate-words-radio.label "Remove Duplicates (no sort)">
-<!ENTITY remove-duplicate-words-sort-radio.label "Remove Duplicates (sort)">
+<!ENTITY duplicate-words-group-checkbox.label "Remove Duplicates">
+<!ENTITY remove-duplicate-words-radio.label "Remove Duplicates">
+<!ENTITY remove-duplicate-words-ignore-case-radio.label "Remove Duplicates (ignore case)">
+<!ENTITY remove-all-duplicate-copies-checkbox.label "Remove all copies of duplicates">
 <!ENTITY saved-settings-groupbox.label "Saved Settings">
-
+<!ENTITY action-options-groupbox.label "Actions">
+<!ENTITY cleaned-list.description "Clean List:">
+<!ENTITY duplicates.description "Duplicates:">
+<!ENTITY bad-words.description "Bad Words:">
+<!ENTITY bad-phrases.description "Bad Phrases:">
+<!ENTITY to-lower-case-checkbox.label "To Lower Case">
+<!ENTITY keyword-column-number.description "Use Column Number:">
+<!ENTITY keyword-has-header.description "Has Headers">
+<!ENTITY bad-words-run-first-checkbox.label "Run First">
+<!ENTITY bad-words-run-last-checkbox.label "Run Last">
+<!ENTITY sort-group-checkbox.label "Sort">
+<!ENTITY sort-ascending-radio.label "Sort Ascending">
+<!ENTITY sort-descending-radio.label "Sort Descending">
+<!ENTITY ignore-case-for-sort-checkbox.label "Ignore Case">
 
