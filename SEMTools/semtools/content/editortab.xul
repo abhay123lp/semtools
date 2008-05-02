@@ -127,6 +127,7 @@
 	                  <caption>
 	                  <checkbox id="bad-words-group-checkbox" label="&bad-words-group-checkbox.label;"/>
 	                  </caption>
+	                  <groupbox>
 	                  <radiogroup id="bad-words-group-radiogroup">
 	                    <radio id="remove-bad-words" label="&remove-bad-words-radio.label;" disabled="true" />
 	                    <radio id="remove-bad-phrases" label="&remove-bad-phrases-radio.label;" disabled="true" />
@@ -134,6 +135,14 @@
 	                  <hbox id="bad-words-run-group">
 	                  	<checkbox id="bad-words-run-first-checkbox" label="&bad-words-run-first-checkbox.label;" disabled="true"/>
 	                  	<checkbox id="bad-words-run-last-checkbox" label="&bad-words-run-last-checkbox.label;" disabled="true"/>
+	                  </hbox>
+	                  </groupbox>
+	                  <vbox id="remove-long-phrases-group">
+	                  <checkbox id="remove-long-phrases-checkbox" label="&remove-long-phrases-checkbox.label;" disabled="true"/>
+	                  </vbox>
+	                  <hbox id="max-words-per-phrase-group">
+	                  <textbox id="max-words-per-phrase" value="10" disabled="true"/>
+	                  <label value="&remove-long-phrases-value.description;" control="max-words-per-phrase" disabled="true"/>
 	                  </hbox>
 	                </groupbox>
 	                <groupbox>

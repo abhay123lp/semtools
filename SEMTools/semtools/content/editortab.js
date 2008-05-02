@@ -81,6 +81,7 @@ function getActionSettings (){
 		if (document.getElementById("bad-words-run-last-checkbox").checked){
 			actionSettings.push([document.getElementById("bad-words-group-radiogroup").selectedItem.id,true]);
 		}
+		actionSettings.push(["remove-long-phrases-checkbox",document.getElementById("remove-long-phrases-checkbox").checked]);
 	}
 	if (document.getElementById("duplicate-group-checkbox").checked){
 		if (document.getElementById("remove-all-duplicate-copies").checked){
@@ -104,10 +105,12 @@ function getActionSettings (){
 function cleanKeywords (keywords, badKeywords){
 	var keywordColumnIndex = (document.getElementById("keywordColumnNumber").value) - 1;
 	KWCreator.keywordColumnIndex = keywordColumnIndex;
+	KWCreator.maxWordsPerPhrase = document.getElementById("max-words-per-phrase").value;
 	var keywordSeperator = "\t";
 	var keywordHasHeader = document.getElementById("keywordHasHeader").checked;
 	var badKeywords = document.getElementById("bad-words-textbox").value;
 	var badPhrases;
+	var duplicates;
 	badKeywords = badKeywords.split("\n");
 	for (var i=0; i<badKeywords.length; i++){
 		if (badKeywords[i] == ""){
@@ -128,6 +131,7 @@ function cleanKeywords (keywords, badKeywords){
 			var resultSet = cleanKeywordsActions (keywords, actionSettings[i][0], keywordColumnIndex, badKeywords);
 			keywords = resultSet[0];
 			badPhrases = resultSet[1];
+			duplicates = resultSet[2];
 		}
 	}
 	for (var i=0; i<keywords.length; i++){
@@ -152,13 +156,18 @@ function cleanKeywords (keywords, badKeywords){
 		var badPhrasesListTextbox = document.getElementById("cleaner-bad-phrases-textbox");
 		badPhrasesListTextbox.value = finalBadKeywordsResult;
 	}
+	if (duplicates != ""){
+		var finalDuplicatesResult = duplicates.join("\n");
+		var duplicatesListTextbox = document.getElementById("cleaner-duplicates-textbox");
+		duplicatesListTextbox.value = finalDuplicatesResult;
+	}
 	cleanListTextbox.value = finalResult;
 	cleanListTextbox.select();
 }
 
-function cleanKeywordsActions (keywords, action, keywordColumnIndex, badWords) {
+function cleanKeywordsActions (keywords, action, keywordColumnIndex, badWords, duplicates) {
 	switch (action) {
-		case "to-lower-case":
+		case "to-lower-case":		
 			for (var i=0; i<keywords.length; i++){
 				//do somethings to keywords[i][keywordColumnIndex]
 				if((keywords[i][keywordColumnIndex])){
@@ -199,7 +208,8 @@ function cleanKeywordsActions (keywords, action, keywordColumnIndex, badWords) {
 		case "remove-bad-characters":
 			for (var i=0; i<keywords.length; i++){
 				//do somethings to keywords[i][keywordColumnIndex]
-				var regEx = new RegExp("\!|\"|\#", "gi");//Need to get this regex from Perl script
+				var regEx = new RegExp("\\W", "gi");//replace all non-word characters with spaces
+				//need to have something for HTML Codes eg. %2B etc.
 				var replacer = " ";
 				if((keywords[i][keywordColumnIndex])){
 					keywords[i][keywordColumnIndex] = keywords[i][keywordColumnIndex].replace(regEx, replacer);
@@ -238,8 +248,26 @@ function cleanKeywordsActions (keywords, action, keywordColumnIndex, badWords) {
 				badPhrases.push(badPhrase);
 			}
 			break;
+		case "remove-long-phrases-checkbox":
+			for (var i=0; i<keywords.length; i++){
+				//do somethings to keywords[i][keywordColumnIndex]
+				var regexStringBase = "\\w\\s";
+				var regexString = "";
+				for (var j=0; j<KWCreator.maxWordsPerPhrase; j++){
+					regexString += regexStringBase;
+				}
+				var regEx = new RegExp(regexString, "i");
+				if ((keywords[i][keywordColumnIndex].search(regEx)) >= 0){
+					var badPhrases = [];
+					badPhrases.push(keywords.splice(i,1));
+				}
+			}
+			break;
 		case "remove-duplicate-words":
 			alert ("remove-duplicate-words");
+			var dedupedResult = removeDuplicates (keywords, keywordColumnIndex, false, false)
+			keywords = dedupedResult[0];
+			duplicates = dedupedResult[1];
 			for (var i=0; i<keywords.length; i++){
 				//do somethings to keywords[i][keywordColumnIndex]
 				
@@ -284,7 +312,42 @@ function cleanKeywordsActions (keywords, action, keywordColumnIndex, badWords) {
 	if (!badPhrases){
 		badPhrases = "";
 	}
-	return [keywords,badPhrases];
+	return [keywords,badPhrases,duplicates];
+}
+
+function removeDuplicates (keywords, keywordColumnIndex, ignoreCase, removeAll){
+	//alert (keywords.length);
+	var uniqueKeywords = [];
+	var duplicateKeywords = [];
+	for (var i=0; i<keywords.length; i++){
+		var firstKeyword = keywords[i][keywordColumnIndex];
+		//alert (uniqueKeywords.length);
+		if (uniqueKeywords.length > 0){
+			for (var j=0; j<uniqueKeywords.length; j++){
+				alert (uniqueKeywords[j]);
+				var secondKeyword = uniqueKeywords[j][keywordColumnIndex];
+				if (ignoreCase){
+					firstKeyword = firstKeyword.toLowerCase();
+					secondKeyword = secondKeyword.toLowerCase();
+				}
+				//alert (firstKeyword + secondKeyword);
+				if (firstKeyword == secondKeyword){
+						duplicateKeywords.push(keywords[i]);
+					if (removeAll){
+						duplicateKeywords.push(uniqueKeywords.slice(j,1));
+					}
+				}
+				if (j == (uniqueKeywords.length - 1)){
+					uniqueKeywords.push(keywords[i]);
+				}
+			}
+		}
+		if (uniqueKeywords.length == 0){
+			//alert ("Length 0");
+			uniqueKeywords.push(keywords[i]);
+		}
+	}
+	return [uniqueKeywords, duplicateKeywords];
 }
 
 function sortAscendingIgnoreCase (a,b) {
@@ -312,7 +375,7 @@ function sortAscending (a,b) {
 }
 
 function disableBadWordsGroup(checkBox){
-	var groupsToDisable = ["bad-words-group-radiogroup", "bad-words-run-group"];
+	var groupsToDisable = ["bad-words-group-radiogroup", "bad-words-run-group", "max-words-per-phrase-group", "remove-long-phrases-group"];
 	for (var i=0; i<groupsToDisable.length; i++){
 		badWordsGroup = document.getElementById(groupsToDisable[i]);
 		for (var j=0; j<badWordsGroup.childNodes.length; j++){
@@ -375,8 +438,8 @@ function groupArrays (firstArray, secondArray){
 		var firstWord = firstArray[i];
 		for (var j = 0; j < secondArray.length; j++){
 			secondWord = secondArray[j].split("\t")
-			var regEx = new RegExp(secondWord[0], regExOptions);
-			var group = secondWord[1];
+			var regEx = new RegExp(secondWord[1], regExOptions);
+			var group = secondWord[0];
 			if (group == undefined){
 				replacer = "";
 			}
