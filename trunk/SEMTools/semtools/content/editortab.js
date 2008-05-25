@@ -5,6 +5,7 @@ function loadAllTabs () {
 	loadKeywordReplacer ()
 	loadKeywordGrouper ()
 	loadKeywordCleaner ()
+	loadListListeners ()
 }
 
 function loadKeywordCreator (){
@@ -574,6 +575,139 @@ function joinArrays (firstArray, secondArray, seperator){
 	return finalResult;
 }
 
+function changeListOrder (topId){
+	if(!topId){
+		var topChild = this.parentNode;
+	}
+	else {
+		var topChild = getThisBranchChildBelowTop (topId, this);
+	}
+	var whereTo = this.whereTo;
+	var parent = topChild.parentNode;
+	switch (whereTo){
+		case "up":
+			if (parent.firstChild != topChild){
+				parent.insertBefore(topChild, topChild.previousSibling);
+			}
+			break;
+		case "down":
+			if (parent.lastChild != topChild){
+				parent.insertBefore(topChild, topChild.nextSibling.nextSibling);
+			}
+			break;
+		case "top":
+			if (parent.firstChild != topChild){
+				parent.insertBefore(topChild, parent.firstChild);
+			}
+			break;
+		case "bottom":
+			if (parent.lastChild != topChild){
+				parent.insertBefore(topChild, parent.lastChild.nextSibling);
+			}
+			break;
+		case "remove":
+				parent.removeChild(topChild);
+			break;
+	}
+}
+
+function getThisBranchChildBelowTop (topId, thisElement){
+	var topElement = document.getElementById(topId);
+	var topChild;
+	while (thisElement.parentNode != topElement){
+		thisElement = thisElement.parentNode;
+	}
+	topChild = thisElement;
+	return topChild;
+}
+
+function appendToList (listTopId){
+	var xmlToAppend;
+	switch (listTopId){
+		case "grouper-rule-list":
+			xmlToAppend = "";
+			break;
+		case "replacer-rule-list":
+			xmlToAppend = "";
+			break;
+	}
+	var currentList = document.getElementById("listTopId");
+	currentList.appendChild(xmlToAppend);
+	currentList.lastChild.textbox[0].select();
+	return currentList.lastChild;
+}
+
+function getArrayFromList(listTopId){
+	var ruleListArray = [];
+	var thisList = document.getElementById(listTopId);
+	//should children be childNodes?
+	for (var i=0; i<thisList.children.length; i++){
+		var thisChild = thisList.children[i];
+		var groupName = thisChild.textbox[0].value;
+		var groupMatch = thisChild.textbox[1].value;
+		ruleListArray.push([groupName, groupMatch]);
+	}
+	return ruleListArray;
+}
+
+function fillListFromArray (listTopId, ruleListArray){
+	var thisList = document.getElementById(listTopId);
+	//Remove all current lists
+	for (var i=0; i<thisList.children.length; i++){
+		thisList.removeChild(thisList.children[i]);
+	}
+	//Add new list and fill in values
+	for (var i=0; i<ruleListArray.length; i++){
+		var lastChild = appendToList(listTopId);
+		lastChild.textbox[0].value = ruleListArray[i][0];
+		lastChild.textbox[1].value = ruleListArray[i][1];
+	}
+	thisList.lastChild.textbox[0].select();
+}
+
+function importRules (importRulesTextboxId, listTopId){
+	var importRulesText = document.getElementById (importRulesTexboxId).value;
+	var lineSeperator = "\n";
+	var tabSeperator = "\t";
+	var ruleList = importRulesText.split(lineSeperator);
+	var ruleListArray = [];
+	for (var i=o; i<ruleList.length; i++){
+		ruleListArray.push(ruleList.split(tabSeperator));
+	}
+}
+
+function exportRules (exportRulesTextboxId, listTopId){
+	var exportRulesArray = getArrayFromList(listTopId);
+	var lineSeperator = "\n";
+	var tabSeperator = "\t";
+	for (var i=0; i<exportRulesArray.length; i++){
+		exportRulesArray[i].join(tabSeperator);
+	}
+	var exportRulesText = exportRulesArray.join(lineSeperator);
+	var exportRulesTextbox = document.getElementById(exportRulesTextboxId);
+	exportRulesTextbox.value = exportRulesText;
+	exportRulesTextbox.select();
+}
+
+function loadListListeners (){
+	var orderableListIds = [["grouper-rule-list", "grouper-add-to-list-button", "grouper-import-rules-textbox", "grouper-import-rules-button", "grouper-export-rules-textbox", "grouper-export-rules-button"], 
+													["replacer-rule-list", "replacer-add-to-list-button", "replacer-import-rules-textbox", "replacer-import-rules-button", "replacer-export-rules-textbox", "replacer-export-rules-button"]];
+	for (var i=0; i<orderableListIds.length; i++){
+		var scopeElementId = orderableListIds[i][0];
+		var allWhereToElements = getElementsByClass("whereTo", scopeElementId);
+		for (var j=0; j<allWhereToElements.length; i++){
+			var currentElement = allWhereToElements[j];
+			currentElement.addEventListener("click", function (){changeListOrder(scopeElementId);},false);
+		}
+		var currentButton = document.getElementById(orderableListIds[i][1]);
+		currentButton.addEventListener("click", function (){appendToList(orderableListIds[i][0]);},false);
+		var exportButton = document.getElementById(orderableListIds[i][3]);
+		exportButton.addEventListener("click", function (){exportRules(orderableListIds[i][4], scopeElementId);},false);
+		var importButton = document.getElementById(orderableListIds[i][5]);
+		importButton.addEventListener("click", function (){importRules(orderableListIds[i][6], scopeElementId);},false);
+	}
+}
+												
 function clearAllFields () {
 	for (var i = 0; i < arguments.length; i++){
 		var thisField = document.getElementById(arguments[i]);
