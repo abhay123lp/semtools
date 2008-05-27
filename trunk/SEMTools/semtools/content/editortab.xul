@@ -45,7 +45,40 @@
 					<hbox flex = "0" overflow="moz-scrollbars-vertical" height = "50">
 						<textbox multiline="true" rows="40" id="replace-textbox-one">
 						</textbox>
-						<textbox multiline="true" rows="40" id="replace-textbox-two"/>
+						<vbox>
+							<groupbox>
+								<vbox>
+									<vbox id="replacer-rule-list">
+										<hbox>
+											<description>Replace</description>
+											<textbox/>
+											<description>With</description>
+											<textbox/>
+											<button label="Edit"/>
+											<button label="X" class="whereTo" whereTo="remove"/>
+											<button label="^" class="whereTo" whereTo="up"/>
+											<button label="T" class="whereTo" whereTo="top"/>
+											<button label="D" class="whereTo" whereTo="down"/>
+											<button label="B" class="whereTo" whereTo="bottom"/>
+										</hbox>
+									</vbox>
+									<button label="Add another Rule" id="replacer-add-to-list-button"/>
+								</vbox>
+							</groupbox>
+							<hbox>
+								<vbox>
+									<button label="Export Rules" id="replacer-export-rules-button"/>
+									<textbox id="replacer-export-rules-texbox" hidden="true"/>
+								</vbox>
+								<vbox>
+									<button label="Import Rules" id="show-import-button"/>
+									<groupbox hidden="true">
+										<textbox id="replacer-import-rules-texbox"/>
+										<button label="Import" id="replacer-import-rules-button"/>
+									</groupbox>
+								</vbox>
+							</hbox>
+						</vbox>
 						<vbox>
 							<checkbox label = "&global-match.label;" symbol = "g" id = "global-match-checkbox" checked = "true"/>
 							<checkbox label = "&ignore-case.label;" symbol = "i" id = "ignore-case-checkbox" checked = "true"/>
@@ -69,8 +102,38 @@
 							<textbox multiline="true" rows="10" id="group-textbox-one"/>
 						</vbox>
 						<vbox>
-							<description>&match-words.description;</description>
-							<textbox multiline="true" rows="10" id="group-textbox-two"/>
+							<groupbox>
+								<vbox>
+									<vbox id="grouper-rule-list">
+										<hbox>
+											<description>Group Name</description>
+											<textbox/>
+											<description>Match</description>
+											<textbox/>
+											<button label="Edit"/>
+											<button label="X" class="whereTo" whereTo="remove"/>
+											<button label="^" class="whereTo" whereTo="up"/>
+											<button label="T" class="whereTo" whereTo="top"/>
+											<button label="D" class="whereTo" whereTo="down"/>
+											<button label="B" class="whereTo" whereTo="bottom"/>
+										</hbox>
+									</vbox>
+									<button label="Add another group" id="grouper-add-to-list-button"/>
+								</vbox>
+							</groupbox>
+							<hbox>
+								<vbox>
+									<button label="Export Groups" id="grouper-export-rules-button"/>
+									<textbox id="grouper-export-rules-texbox" hidden="true"/>
+								</vbox>
+								<vbox>
+									<button label="Import Groups" id="show-import-button"/>
+									<groupbox hidden="true">
+										<textbox id="grouper-import-rules-texbox"/>
+										<button label="Import" id="grouper-import-rules-button"/>
+									</groupbox>
+								</vbox>
+							</hbox>
 						</vbox>
 						<vbox>
 							<button label = "&group-keywords-button.label;" height = "10" id = "group-button">
