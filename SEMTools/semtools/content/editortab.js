@@ -625,11 +625,32 @@ function appendToList (listTopId){
 	var xmlToAppend;
 	switch (listTopId){
 		case "grouper-rule-list":
-			xmlToAppend = "";
+			var xmlStringToAppend = '<hbox>' +
+				'<textbox label="Group Name"/>' +
+				'<textbox label="Match"/>' +
+				'<button label="Edit"/>' +
+				'<button label="X" class="whereTo" whereTo="remove"/>' +
+				'<button label="^" class="whereTo" whereTo="up"/>' +
+				'<button label="T" class="whereTo" whereTo="top"/>' +
+				'<button label="D" class="whereTo" whereTo="down"/>' +
+				'<button label="B" class="whereTo" whereTo="bottom"/>' +
+			'</hbox>';
+			var parser = new DOMParser ();
+			xmlToAppend = parser.parseFromString(xmlStringToAppend, "application/xml");
 			break;
 		case "replacer-rule-list":
-			xmlToAppend = "";
-			break;
+			var xmlStringToAppend = '<hbox>' +
+				'<textbox label="Replace"/>' +
+				'<textbox label="with"/>' +
+				'<button label="Edit"/>' +
+				'<button label="X" class="whereTo" whereTo="remove"/>' +
+				'<button label="^" class="whereTo" whereTo="up"/>' +
+				'<button label="T" class="whereTo" whereTo="top"/>' +
+				'<button label="D" class="whereTo" whereTo="down"/>' +
+				'<button label="B" class="whereTo" whereTo="bottom"/>' +
+			'</hbox>';
+			var parser = new DOMParser ();
+			xmlToAppend = parser.parseFromString(xmlStringToAppend, "application/xml");			break;
 	}
 	var currentList = document.getElementById("listTopId");
 	currentList.appendChild(xmlToAppend);
@@ -695,7 +716,7 @@ function loadListListeners (){
 	for (var i=0; i<orderableListIds.length; i++){
 		var scopeElementId = orderableListIds[i][0];
 		var allWhereToElements = getElementsByClass("whereTo", scopeElementId);
-		for (var j=0; j<allWhereToElements.length; i++){
+		for (var j=0; j<allWhereToElements.length; j++){
 			var currentElement = allWhereToElements[j];
 			currentElement.addEventListener("click", function (){changeListOrder(scopeElementId);},false);
 		}
@@ -706,6 +727,22 @@ function loadListListeners (){
 		var importButton = document.getElementById(orderableListIds[i][5]);
 		importButton.addEventListener("click", function (){importRules(orderableListIds[i][6], scopeElementId);},false);
 	}
+}
+
+function getElementsByClass (whereTo, scopeElementId){
+	var allElementsofClassArray = [];
+	var allElementsofClass, thisElement;
+	allElementsofClass = document.evaluate(
+    '//*[@class="whereTo"]',
+    document,
+    null,
+    XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
+    null);
+	for (var i = 0; i < allElementsofClass.snapshotLength; i++) {
+    thisElement = allElementsofClass.snapshotItem(i);
+    allElementsofClassArray.push(thisElement);
+	}
+	return allElementsofClassArray;
 }
 												
 function clearAllFields () {
