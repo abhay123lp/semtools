@@ -6,6 +6,7 @@ function loadAllTabs () {
 	loadKeywordGrouper ()
 	loadKeywordCleaner ()
 	loadListListeners ()
+	window.removeEventListener("load", loadAllTabs, true);
 }
 
 function loadKeywordCreator (){
