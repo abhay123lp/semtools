@@ -68,12 +68,12 @@
 							<hbox>
 								<vbox>
 									<button label="Export Rules" id="replacer-export-rules-button"/>
-									<textbox id="replacer-export-rules-texbox" hidden="true"/>
+									<textbox id="replacer-export-rules-textbox" hidden="true" multiline="true"/>
 								</vbox>
 								<vbox>
-									<button label="Import Rules" id="show-import-button"/>
-									<groupbox hidden="true">
-										<textbox id="replacer-import-rules-texbox"/>
+									<button label="Import Rules" id="replacer-show-import-button"/>
+									<groupbox hidden="true" flex ="1">
+										<textbox id="replacer-import-rules-textbox" multiline="true"/>
 										<button label="Import" id="replacer-import-rules-button"/>
 									</groupbox>
 								</vbox>
@@ -124,12 +124,12 @@
 							<hbox>
 								<vbox>
 									<button label="Export Groups" id="grouper-export-rules-button"/>
-									<textbox id="grouper-export-rules-texbox" hidden="true"/>
+									<textbox id="grouper-export-rules-textbox" hidden="true" multiline="true"/>
 								</vbox>
 								<vbox>
-									<button label="Import Groups" id="show-import-button"/>
+									<button label="Import Groups" id="grouper-show-import-button"/>
 									<groupbox hidden="true">
-										<textbox id="grouper-import-rules-texbox"/>
+										<textbox id="grouper-import-rules-textbox" multiline="true"/>
 										<button label="Import" id="grouper-import-rules-button"/>
 									</groupbox>
 								</vbox>
