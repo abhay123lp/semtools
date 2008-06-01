@@ -576,14 +576,15 @@ function joinArrays (firstArray, secondArray, seperator){
 	return finalResult;
 }
 
-function changeListOrder (topId){
+function changeListOrder (topId, target){
+	//alert (target);
 	if(!topId){
-		var topChild = this.parentNode;
+		var topChild = target.parentNode;
 	}
 	else {
-		var topChild = getThisBranchChildBelowTop (topId, this);
+		var topChild = getThisBranchChildBelowTop (topId, target);
 	}
-	var whereTo = this.whereTo;
+	var whereTo = target.whereTo;
 	var parent = topChild.parentNode;
 	switch (whereTo){
 		case "up":
@@ -623,9 +624,51 @@ function getThisBranchChildBelowTop (topId, thisElement){
 }
 
 function appendToList (listTopId){
+	//alert (listTopId);
 	var xmlToAppend;
 	switch (listTopId){
 		case "grouper-rule-list":
+			//alert ("grouper");
+			var xmlElementToAppend = document.createElement("hbox");
+			var description1 = document.createElement("description");
+			description1.setAttribute("value","Group Name");
+			xmlElementToAppend.appendChild(description1);
+			var textbox1 = document.createElement("textbox");
+			xmlElementToAppend.appendChild(textbox1);
+			var description2 = document.createElement("description");
+			description2.setAttribute("value","Match");
+			xmlElementToAppend.appendChild(description2);
+			var textbox2 = document.createElement("textbox");
+			xmlElementToAppend.appendChild(textbox2);
+			var button1 = document.createElement("button");
+			button1.setAttribute("label","Edit");
+			xmlElementToAppend.appendChild(button1);
+			var button2 = document.createElement("button");
+			button2.setAttribute("label","X");
+			button2.setAttribute("class","whereTo");
+			button2.setAttribute("whereTo","remove");
+			xmlElementToAppend.appendChild(button2);
+			var button3 = document.createElement("button");
+			button3.setAttribute("label","^");
+			button3.setAttribute("class","whereTo");
+			button3.setAttribute("whereTo","up");
+			xmlElementToAppend.appendChild(button3);
+			var button4 = document.createElement("button");
+			button4.setAttribute("label","T");
+			button4.setAttribute("class","whereTo");
+			button4.setAttribute("whereTo","top");
+			xmlElementToAppend.appendChild(button4);
+			var button5 = document.createElement("button");
+			button5.setAttribute("label","D");
+			button5.setAttribute("class","whereTo");
+			button5.setAttribute("whereTo","down");
+			xmlElementToAppend.appendChild(button5);
+			var button6 = document.createElement("button");
+			button6.setAttribute("label","B");
+			button6.setAttribute("class","whereTo");
+			button6.setAttribute("whereTo","bottom");
+			xmlElementToAppend.appendChild(button6);
+			/*
 			var xmlStringToAppend = '<hbox>' +
 				'<textbox label="Group Name"/>' +
 				'<textbox label="Match"/>' +
@@ -638,8 +681,50 @@ function appendToList (listTopId){
 			'</hbox>';
 			var parser = new DOMParser ();
 			xmlToAppend = parser.parseFromString(xmlStringToAppend, "application/xml");
+			*/
+			xmlToAppend = xmlElementToAppend;
 			break;
 		case "replacer-rule-list":
+			var xmlElementToAppend = document.createElement("hbox");
+			var description1 = document.createElement("description");
+			description1.setAttribute("value","Replace");
+			xmlElementToAppend.appendChild(description1);
+			var textbox1 = document.createElement("textbox");
+			xmlElementToAppend.appendChild(textbox1);
+			var description2 = document.createElement("description");
+			description2.setAttribute("value","with");
+			xmlElementToAppend.appendChild(description2);
+			var textbox2 = document.createElement("textbox");
+			xmlElementToAppend.appendChild(textbox2);
+			var button1 = document.createElement("button");
+			button1.setAttribute("label","Edit");
+			xmlElementToAppend.appendChild(button1);
+			var button2 = document.createElement("button");
+			button2.setAttribute("label","X");
+			button2.setAttribute("class","whereTo");
+			button2.setAttribute("whereTo","remove");
+			xmlElementToAppend.appendChild(button2);
+			var button3 = document.createElement("button");
+			button3.setAttribute("label","^");
+			button3.setAttribute("class","whereTo");
+			button3.setAttribute("whereTo","up");
+			xmlElementToAppend.appendChild(button3);
+			var button4 = document.createElement("button");
+			button4.setAttribute("label","T");
+			button4.setAttribute("class","whereTo");
+			button4.setAttribute("whereTo","top");
+			xmlElementToAppend.appendChild(button4);
+			var button5 = document.createElement("button");
+			button5.setAttribute("label","D");
+			button5.setAttribute("class","whereTo");
+			button5.setAttribute("whereTo","down");
+			xmlElementToAppend.appendChild(button5);
+			var button6 = document.createElement("button");
+			button6.setAttribute("label","B");
+			button6.setAttribute("class","whereTo");
+			button6.setAttribute("whereTo","bottom");
+			xmlElementToAppend.appendChild(button6);
+			/*
 			var xmlStringToAppend = '<hbox>' +
 				'<textbox label="Replace"/>' +
 				'<textbox label="with"/>' +
@@ -651,51 +736,57 @@ function appendToList (listTopId){
 				'<button label="B" class="whereTo" whereTo="bottom"/>' +
 			'</hbox>';
 			var parser = new DOMParser ();
-			xmlToAppend = parser.parseFromString(xmlStringToAppend, "application/xml");			break;
+			xmlToAppend = parser.parseFromString(xmlStringToAppend, "application/xml");
+			*/
+			xmlToAppend = xmlElementToAppend;
+			break;
 	}
-	var currentList = document.getElementById("listTopId");
+	var currentList = document.getElementById(listTopId);
 	currentList.appendChild(xmlToAppend);
-	currentList.lastChild.textbox[0].select();
+	//currentList.lastChild.getElementsByTagName("textbox")[0].select();
 	return currentList.lastChild;
 }
 
 function getArrayFromList(listTopId){
 	var ruleListArray = [];
 	var thisList = document.getElementById(listTopId);
-	//should children be childNodes?
-	for (var i=0; i<thisList.children.length; i++){
-		var thisChild = thisList.children[i];
-		var groupName = thisChild.textbox[0].value;
-		var groupMatch = thisChild.textbox[1].value;
+	for (var i=0; i<thisList.childNodes.length; i++){
+		var thisChild = thisList.childNodes[i];
+		theseTextboxes = thisChild.getElementsByTagName("textbox");
+		//alert ();
+		var groupName = theseTextboxes[0].value;
+		var groupMatch = theseTextboxes[1].value;
 		ruleListArray.push([groupName, groupMatch]);
 	}
+	//alert (ruleListArray);
 	return ruleListArray;
 }
 
 function fillListFromArray (listTopId, ruleListArray){
 	var thisList = document.getElementById(listTopId);
 	//Remove all current lists
-	for (var i=0; i<thisList.children.length; i++){
-		thisList.removeChild(thisList.children[i]);
+	for (var i=0; i<thisList.childNodes.length; i++){
+		thisList.removeChild(thisList.childNodes[i]);
 	}
 	//Add new list and fill in values
 	for (var i=0; i<ruleListArray.length; i++){
 		var lastChild = appendToList(listTopId);
-		lastChild.textbox[0].value = ruleListArray[i][0];
-		lastChild.textbox[1].value = ruleListArray[i][1];
+		lastChild.getElementsByTagName("textbox")[0].value = ruleListArray[i][0];
+		lastChild.getElementsByTagName("textbox")[1].value = ruleListArray[i][1];
 	}
-	thisList.lastChild.textbox[0].select();
+	//thisList.lastChild.getElementsByTagName("textbox")[0].select();
 }
 
 function importRules (importRulesTextboxId, listTopId){
-	var importRulesText = document.getElementById (importRulesTexboxId).value;
+	var importRulesText = document.getElementById (importRulesTextboxId).value;
 	var lineSeperator = "\n";
 	var tabSeperator = "\t";
 	var ruleList = importRulesText.split(lineSeperator);
 	var ruleListArray = [];
-	for (var i=o; i<ruleList.length; i++){
-		ruleListArray.push(ruleList.split(tabSeperator));
+	for (var i=0; i<ruleList.length; i++){
+		ruleListArray.push(ruleList[i].split(tabSeperator));
 	}
+	fillListFromArray (listTopId, ruleListArray);
 }
 
 function exportRules (exportRulesTextboxId, listTopId){
@@ -707,35 +798,69 @@ function exportRules (exportRulesTextboxId, listTopId){
 	}
 	var exportRulesText = exportRulesArray.join(lineSeperator);
 	var exportRulesTextbox = document.getElementById(exportRulesTextboxId);
+	//alert (exportRulesTextbox);
 	exportRulesTextbox.value = exportRulesText;
+	exportRulesTextbox.hidden = false;
 	exportRulesTextbox.select();
 }
 
 function loadListListeners (){
-	var orderableListIds = [["grouper-rule-list", "grouper-add-to-list-button", "grouper-import-rules-textbox", "grouper-import-rules-button", "grouper-export-rules-textbox", "grouper-export-rules-button"], 
-													["replacer-rule-list", "replacer-add-to-list-button", "replacer-import-rules-textbox", "replacer-import-rules-button", "replacer-export-rules-textbox", "replacer-export-rules-button"]];
+	var grouperScopeElementId = "grouper-rule-list";
+	var grouperAddToListButton = document.getElementById("grouper-add-to-list-button");
+	grouperAddToListButton.addEventListener("click", function (){appendToList("grouper-rule-list");},false);
+	var grouperExportButton = document.getElementById("grouper-export-rules-button");
+	grouperExportButton.addEventListener("click", function (){exportRules("grouper-export-rules-textbox", grouperScopeElementId);},false);
+	var grouperImportButton = document.getElementById("grouper-import-rules-button");
+	grouperImportButton.addEventListener("click", function (){importRules("grouper-import-rules-textbox", grouperScopeElementId);},false);
+	var grouperShowImportButton = document.getElementById("grouper-show-import-button");
+	grouperShowImportButton.addEventListener("click",function (){unhideElement(grouperShowImportButton.nextSibling);},false);
+
+	var replacerScopeElementId = "replacer-rule-list";
+	var replacerAddToListButton = document.getElementById("replacer-add-to-list-button");
+	replacerAddToListButton.addEventListener("click", function (){appendToList("replacer-rule-list");},false);
+	var replacerExportButton = document.getElementById("replacer-export-rules-button");
+	replacerExportButton.addEventListener("click", function (){exportRules("replacer-export-rules-textbox", replacerScopeElementId);},false);
+	var replacerImportButton = document.getElementById("replacer-import-rules-button");
+	replacerImportButton.addEventListener("click", function (){importRules("replacer-import-rules-textbox", replacerScopeElementId);},false);
+	var replacerShowImportButton = document.getElementById("replacer-show-import-button");
+	replacerShowImportButton.addEventListener("click",function (){unhideElement(replacerShowImportButton.nextSibling);},false);
+
+	var orderableListIds = [["grouper-rule-list", "grouper-add-to-list-button", "grouper-import-rules-textbox", "grouper-import-rules-button", "grouper-export-rules-textbox", "grouper-export-rules-button", "grouper-show-import-button"], 
+													["replacer-rule-list", "replacer-add-to-list-button", "replacer-import-rules-textbox", "replacer-import-rules-button", "replacer-export-rules-textbox", "replacer-export-rules-button", "replacer-show-import-button"]];
 	for (var i=0; i<orderableListIds.length; i++){
 		var scopeElementId = orderableListIds[i][0];
 		var allWhereToElements = getElementsByClass("whereTo", scopeElementId);
 		for (var j=0; j<allWhereToElements.length; j++){
 			var currentElement = allWhereToElements[j];
-			currentElement.addEventListener("click", function (){changeListOrder(scopeElementId);},false);
+			currentElement.addEventListener("click", function (event){changeListOrder(scopeElementId,event.currentTarget);},false);
 		}
+		/*
 		var currentButton = document.getElementById(orderableListIds[i][1]);
-		currentButton.addEventListener("click", function (){appendToList(orderableListIds[i][0]);},false);
-		var exportButton = document.getElementById(orderableListIds[i][3]);
-		exportButton.addEventListener("click", function (){exportRules(orderableListIds[i][4], scopeElementId);},false);
-		var importButton = document.getElementById(orderableListIds[i][5]);
-		importButton.addEventListener("click", function (){importRules(orderableListIds[i][6], scopeElementId);},false);
+		//alert ();
+		var thisList = orderableListIds[i][0] + "";
+		//alert (thisList);
+		var thisExportTextbox = orderableListIds[i][4];
+		var thisImportTextbox = orderableListIds[i][6];
+		currentButton.addEventListener("click", function (){appendToList(thisList);},false);
+		var exportButton = document.getElementById(orderableListIds[i][5]);
+		exportButton.addEventListener("click", function (){exportRules(thisExportTextbox, scopeElementId);},false);
+		var importButton = document.getElementById(orderableListIds[i][3]);
+		importButton.addEventListener("click", function (){importRules(thisImportTextbox, scopeElementId);},false);
+		var showImportButton = document.getElementById(orderableListIds[i][6]);
+		showImportButton.addEventListener("click",function (){unhideElement(showImportButton.nextSibling);},false);
+		*/
 	}
 }
 
 function getElementsByClass (whereTo, scopeElementId){
+	var scopeElement = document.getElementById(scopeElementId);
+	//var classXPath = '//*[@class="' + whereTo + '"]';
+	//replace string below with classXPath
 	var allElementsofClassArray = [];
 	var allElementsofClass, thisElement;
 	allElementsofClass = document.evaluate(
     '//*[@class="whereTo"]',
-    document,
+    scopeElement,
     null,
     XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
     null);
@@ -744,6 +869,10 @@ function getElementsByClass (whereTo, scopeElementId){
     allElementsofClassArray.push(thisElement);
 	}
 	return allElementsofClassArray;
+}
+
+function unhideElement (element){
+	element.hidden = false;
 }
 												
 function clearAllFields () {
