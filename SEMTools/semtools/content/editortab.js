@@ -577,15 +577,16 @@ function joinArrays (firstArray, secondArray, seperator){
 }
 
 function changeListOrder (topId, target){
-	//alert (target);
 	if(!topId){
 		var topChild = target.parentNode;
 	}
 	else {
 		var topChild = getThisBranchChildBelowTop (topId, target);
 	}
-	var whereTo = target.whereTo;
+	var whereTo = target.getAttribute("whereTo");
 	var parent = topChild.parentNode;
+	var topChildValueOne = topChild.getElementsByTagName("textbox")[0].value;
+	var topChildValueTwo = topChild.getElementsByTagName("textbox")[1].value;
 	switch (whereTo){
 		case "up":
 			if (parent.firstChild != topChild){
@@ -607,10 +608,13 @@ function changeListOrder (topId, target){
 				parent.insertBefore(topChild, parent.lastChild.nextSibling);
 			}
 			break;
-		case "remove":
+		case "remove":				
 				parent.removeChild(topChild);
 			break;
 	}
+	topChild.getElementsByTagName("textbox")[0].value = topChildValueOne;
+	topChild.getElementsByTagName("textbox")[1].value = topChildValueTwo;
+	addListenerToClass("whereTo", topId);
 }
 
 function getThisBranchChildBelowTop (topId, thisElement){
@@ -744,6 +748,7 @@ function appendToList (listTopId){
 	var currentList = document.getElementById(listTopId);
 	currentList.appendChild(xmlToAppend);
 	//currentList.lastChild.getElementsByTagName("textbox")[0].select();
+	addListenerToClass("whereTo", listTopId);
 	return currentList.lastChild;
 }
 
@@ -764,9 +769,10 @@ function getArrayFromList(listTopId){
 
 function fillListFromArray (listTopId, ruleListArray){
 	var thisList = document.getElementById(listTopId);
+	//alert (thisList.childNodes.length);
 	//Remove all current lists
-	for (var i=0; i<thisList.childNodes.length; i++){
-		thisList.removeChild(thisList.childNodes[i]);
+	while (thisList.childNodes.length != 0){
+		thisList.removeChild(thisList.lastChild);
 	}
 	//Add new list and fill in values
 	for (var i=0; i<ruleListArray.length; i++){
@@ -791,10 +797,11 @@ function importRules (importRulesTextboxId, listTopId){
 
 function exportRules (exportRulesTextboxId, listTopId){
 	var exportRulesArray = getArrayFromList(listTopId);
+	//alert (exportRulesArray[1][1]);
 	var lineSeperator = "\n";
 	var tabSeperator = "\t";
 	for (var i=0; i<exportRulesArray.length; i++){
-		exportRulesArray[i].join(tabSeperator);
+		exportRulesArray[i] = exportRulesArray[i].join(tabSeperator);
 	}
 	var exportRulesText = exportRulesArray.join(lineSeperator);
 	var exportRulesTextbox = document.getElementById(exportRulesTextboxId);
@@ -813,7 +820,8 @@ function loadListListeners (){
 	var grouperImportButton = document.getElementById("grouper-import-rules-button");
 	grouperImportButton.addEventListener("click", function (){importRules("grouper-import-rules-textbox", grouperScopeElementId);},false);
 	var grouperShowImportButton = document.getElementById("grouper-show-import-button");
-	grouperShowImportButton.addEventListener("click",function (){unhideElement(grouperShowImportButton.nextSibling);},false);
+	grouperShowImportButton.addEventListener("click",function (){toggleHideElement(grouperShowImportButton.nextSibling);},false);
+	addListenerToClass("whereTo", "grouper-rule-list");
 
 	var replacerScopeElementId = "replacer-rule-list";
 	var replacerAddToListButton = document.getElementById("replacer-add-to-list-button");
@@ -823,8 +831,10 @@ function loadListListeners (){
 	var replacerImportButton = document.getElementById("replacer-import-rules-button");
 	replacerImportButton.addEventListener("click", function (){importRules("replacer-import-rules-textbox", replacerScopeElementId);},false);
 	var replacerShowImportButton = document.getElementById("replacer-show-import-button");
-	replacerShowImportButton.addEventListener("click",function (){unhideElement(replacerShowImportButton.nextSibling);},false);
+	replacerShowImportButton.addEventListener("click",function (){toggleHideElement(replacerShowImportButton.nextSibling);},false);
+	addListenerToClass("whereTo", "replacer-rule-list");
 
+	/*
 	var orderableListIds = [["grouper-rule-list", "grouper-add-to-list-button", "grouper-import-rules-textbox", "grouper-import-rules-button", "grouper-export-rules-textbox", "grouper-export-rules-button", "grouper-show-import-button"], 
 													["replacer-rule-list", "replacer-add-to-list-button", "replacer-import-rules-textbox", "replacer-import-rules-button", "replacer-export-rules-textbox", "replacer-export-rules-button", "replacer-show-import-button"]];
 	for (var i=0; i<orderableListIds.length; i++){
@@ -834,6 +844,7 @@ function loadListListeners (){
 			var currentElement = allWhereToElements[j];
 			currentElement.addEventListener("click", function (event){changeListOrder(scopeElementId,event.currentTarget);},false);
 		}
+		*/
 		/*
 		var currentButton = document.getElementById(orderableListIds[i][1]);
 		//alert ();
@@ -848,8 +859,8 @@ function loadListListeners (){
 		importButton.addEventListener("click", function (){importRules(thisImportTextbox, scopeElementId);},false);
 		var showImportButton = document.getElementById(orderableListIds[i][6]);
 		showImportButton.addEventListener("click",function (){unhideElement(showImportButton.nextSibling);},false);
-		*/
 	}
+	*/
 }
 
 function getElementsByClass (whereTo, scopeElementId){
@@ -871,8 +882,17 @@ function getElementsByClass (whereTo, scopeElementId){
 	return allElementsofClassArray;
 }
 
-function unhideElement (element){
-	element.hidden = false;
+function toggleHideElement (element){
+	element.hidden = (!element.hidden);
+}
+
+function addListenerToClass (whereTo, scopeElementId){
+	var allWhereToElements = getElementsByClass(whereTo, scopeElementId);
+	//alert (allWhereToElements);
+	for (var i=0; i<allWhereToElements.length; i++){
+		var currentElement = allWhereToElements[i];
+		currentElement.addEventListener("click", function (event){changeListOrder(scopeElementId,event.currentTarget);},false);
+	}
 }
 												
 function clearAllFields () {

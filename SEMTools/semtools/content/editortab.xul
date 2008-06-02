@@ -52,7 +52,7 @@
 										<hbox>
 											<description>Replace</description>
 											<textbox/>
-											<description>With</description>
+											<description>with</description>
 											<textbox/>
 											<button label="Edit"/>
 											<button label="X" class="whereTo" whereTo="remove"/>
