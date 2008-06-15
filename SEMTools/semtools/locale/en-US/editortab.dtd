@@ -49,5 +49,10 @@
 <!ENTITY ignore-case-for-sort-checkbox.label "Ignore Case">
 <!ENTITY remove-long-phrases-checkbox.label "Remove phrases with more than:">
 <!ENTITY remove-long-phrases-value.description "words">
-
+<!ENTITY list-edit.label "Edit">
+<!ENTITY list-remove.label "Remove">
+<!ENTITY list-up.label "Up">
+<!ENTITY list-top.label "Top">
+<!ENTITY list-down.label "Down">
+<!ENTITY list-bottom.label "Bottom">
 
