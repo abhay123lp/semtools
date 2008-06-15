@@ -26,20 +26,20 @@ function loadKeywordCreator (){
 function loadKeywordReplacer () {
 	var replaceKeywordsButton = document.getElementById("replace-button");
 	var textBoxOne = document.getElementById("replace-textbox-one");
-	var textBoxTwo = document.getElementById("replace-textbox-two");
+	//var textBoxTwo = document.getElementById("replace-textbox-two");
 	var resultsTextbox = document.getElementById("replacer-results-textbox");
 	var clearFieldsButton = document.getElementById("clear-replacer-fields-button");
-	replaceKeywordsButton.addEventListener("click", function () {replaceKeywords(textBoxOne.value, textBoxTwo.value);}, false);
+	replaceKeywordsButton.addEventListener("click", function () {replaceKeywords(textBoxOne.value);}, false);
 	clearFieldsButton.addEventListener("click", function () {clearAllFields("replace-textbox-one", "replace-textbox-two", "replacer-results-textbox");}, false);
 }
 
 function loadKeywordGrouper () {
 	var groupKeywordsButton = document.getElementById("group-button");
 	var textBoxOne = document.getElementById("group-textbox-one");
-	var textBoxTwo = document.getElementById("group-textbox-two");
+	//var textBoxTwo = document.getElementById("group-textbox-two");
 	var resultsTextbox = document.getElementById("grouper-results-textbox");
 	var clearFieldsButton = document.getElementById("clear-grouper-fields-button");
-	groupKeywordsButton.addEventListener("click", function () {groupKeywords(textBoxOne.value, textBoxTwo.value);}, false);
+	groupKeywordsButton.addEventListener("click", function () {groupKeywords(textBoxOne.value);}, false);
 	clearFieldsButton.addEventListener("click", function () {clearAllFields("group-textbox-one", "group-textbox-two", "grouper-results-textbox");}, false);
 }
 
@@ -400,8 +400,9 @@ function disableSortGroup(checkBox){
 	}
 }
 
-function groupKeywords (firstSet, secondSet) {
-	var arrays = [firstSet, secondSet];
+function groupKeywords (firstSet) {
+	var exportRulesArray = getArrayFromList("grouper-rule-list");
+	var arrays = [firstSet];
 	for (var i = 0; i < arrays.length; i++){
 		var thisArray = arrays[i].replace(/\n\n/g, "\n");
 		while (thisArray.match(/\n\n/g)){
@@ -420,6 +421,7 @@ function groupKeywords (firstSet, secondSet) {
 		thisArray = returnArray;
 		arrays[i] = thisArray;
 	}
+	arrays.push(exportRulesArray);
 	var result = groupArrays (arrays[0], arrays[1]);
 	var finalResult = result[0];
 	var remainingWords = result[1];
@@ -439,7 +441,7 @@ function groupArrays (firstArray, secondArray){
 	for (var i = 0; i < firstArray.length; i++){
 		var firstWord = firstArray[i];
 		for (var j = 0; j < secondArray.length; j++){
-			secondWord = secondArray[j].split("\t")
+			secondWord = secondArray[j];
 			var regEx = new RegExp(secondWord[1], regExOptions);
 			var group = secondWord[0];
 			if (group == undefined){
@@ -460,7 +462,7 @@ function groupArrays (firstArray, secondArray){
 	return [finalResult, firstArray];
 }
 
-function replaceKeywords (firstSet, secondSet) {
+function replaceKeywords (firstSet) {
 	var globalMatch = document.getElementById("global-match-checkbox");
 	var ignoreCase = document.getElementById("ignore-case-checkbox");
 	if (globalMatch.checked == true){
@@ -476,7 +478,7 @@ function replaceKeywords (firstSet, secondSet) {
 		var regExCase = "";
 	}
 	var regExOptions = regExGlobal + regExCase;
-	var arrays = [firstSet, secondSet];
+	var arrays = [firstSet];
 	for (var i = 0; i < arrays.length; i++){
 		var thisArray = arrays[i].replace(/\n\n/g, "\n");
 		while (thisArray.match(/\n\n/g)){
@@ -495,7 +497,8 @@ function replaceKeywords (firstSet, secondSet) {
 		thisArray = returnArray;
 		arrays[i] = thisArray;
 	}
-	var finalResult = replaceArrays (arrays[0], arrays[1], regExOptions);
+	var exportRulesArray = getArrayFromList("replacer-rule-list");
+	var finalResult = replaceArrays (arrays[0], exportRulesArray, regExOptions);
 	finalResult = finalResult.join("\n");
 	var resultsTextbox = document.getElementById("replacer-results-textbox");
 	resultsTextbox.value = finalResult;
@@ -507,7 +510,7 @@ function replaceArrays (firstArray, secondArray, regExOptions) {
 	for (var i = 0; i < firstArray.length; i++){
 		var firstWord = firstArray[i];
 		for (var j = 0; j < secondArray.length; j++){
-			secondWord = secondArray[j].split("\t")
+			secondWord = secondArray[j];
 			var regEx = new RegExp(secondWord[0], regExOptions);
 			var replacer = secondWord[1];
 			if (replacer == undefined){
@@ -645,43 +648,61 @@ function appendToList (listTopId){
 			var textbox2 = document.createElement("textbox");
 			xmlElementToAppend.appendChild(textbox2);
 			var button1 = document.createElement("button");
-			button1.setAttribute("label","Edit");
+			button1.setAttribute("tooltiptext","Edit");
+			button1.setAttribute("collapsed","true");
 			xmlElementToAppend.appendChild(button1);
-			var button2 = document.createElement("button");
-			button2.setAttribute("label","X");
+			var button2 = document.createElement("image");
+			button2.setAttribute("tooltiptext","X");
 			button2.setAttribute("class","whereTo");
 			button2.setAttribute("whereTo","remove");
+			button2.setAttribute("src","chrome://adhighlighter/content/resources/reorder-remove-icon.jpg");
 			xmlElementToAppend.appendChild(button2);
-			var button3 = document.createElement("button");
-			button3.setAttribute("label","^");
+			var seperator2 = document.createElement("seperator");
+			seperator2.setAttribute("width","10");
+			xmlElementToAppend.appendChild(seperator2);
+			var button3 = document.createElement("image");
+			button3.setAttribute("tooltiptext","^");
 			button3.setAttribute("class","whereTo");
 			button3.setAttribute("whereTo","up");
+			button3.setAttribute("src","chrome://adhighlighter/content/resources/reorder-up-icon.jpg");
 			xmlElementToAppend.appendChild(button3);
-			var button4 = document.createElement("button");
-			button4.setAttribute("label","T");
+			var seperator3 = document.createElement("seperator");
+			seperator3.setAttribute("width","10");
+			xmlElementToAppend.appendChild(seperator3);
+			var button4 = document.createElement("image");
+			button4.setAttribute("tooltiptext","T");
 			button4.setAttribute("class","whereTo");
 			button4.setAttribute("whereTo","top");
+			button4.setAttribute("src","chrome://adhighlighter/content/resources/reorder-top-icon.jpg");
 			xmlElementToAppend.appendChild(button4);
-			var button5 = document.createElement("button");
-			button5.setAttribute("label","D");
+			var seperator4 = document.createElement("seperator");
+			seperator4.setAttribute("width","10");
+			xmlElementToAppend.appendChild(seperator4);
+			var button5 = document.createElement("image");
+			button5.setAttribute("tooltiptext","D");
 			button5.setAttribute("class","whereTo");
 			button5.setAttribute("whereTo","down");
+			button5.setAttribute("src","chrome://adhighlighter/content/resources/reorder-down-icon.jpg");
 			xmlElementToAppend.appendChild(button5);
-			var button6 = document.createElement("button");
-			button6.setAttribute("label","B");
+			var seperator5 = document.createElement("seperator");
+			seperator5.setAttribute("width","10");
+			xmlElementToAppend.appendChild(seperator5);
+			var button6 = document.createElement("image");
+			button6.setAttribute("tooltiptext","B");
 			button6.setAttribute("class","whereTo");
 			button6.setAttribute("whereTo","bottom");
+			button6.setAttribute("src","chrome://adhighlighter/content/resources/reorder-bottom-icon.jpg");
 			xmlElementToAppend.appendChild(button6);
 			/*
 			var xmlStringToAppend = '<hbox>' +
-				'<textbox label="Group Name"/>' +
-				'<textbox label="Match"/>' +
-				'<button label="Edit"/>' +
-				'<button label="X" class="whereTo" whereTo="remove"/>' +
-				'<button label="^" class="whereTo" whereTo="up"/>' +
-				'<button label="T" class="whereTo" whereTo="top"/>' +
-				'<button label="D" class="whereTo" whereTo="down"/>' +
-				'<button label="B" class="whereTo" whereTo="bottom"/>' +
+				'<textbox tooltiptext="Group Name"/>' +
+				'<textbox tooltiptext="Match"/>' +
+				'<button tooltiptext="Edit"/>' +
+				'<button tooltiptext="X" class="whereTo" whereTo="remove"/>' +
+				'<button tooltiptext="^" class="whereTo" whereTo="up"/>' +
+				'<button tooltiptext="T" class="whereTo" whereTo="top"/>' +
+				'<button tooltiptext="D" class="whereTo" whereTo="down"/>' +
+				'<button tooltiptext="B" class="whereTo" whereTo="bottom"/>' +
 			'</hbox>';
 			var parser = new DOMParser ();
 			xmlToAppend = parser.parseFromString(xmlStringToAppend, "application/xml");
@@ -701,32 +722,50 @@ function appendToList (listTopId){
 			var textbox2 = document.createElement("textbox");
 			xmlElementToAppend.appendChild(textbox2);
 			var button1 = document.createElement("button");
-			button1.setAttribute("label","Edit");
+			button1.setAttribute("tooltiptext","Edit");
+			button1.setAttribute("collapsed","true");
 			xmlElementToAppend.appendChild(button1);
-			var button2 = document.createElement("button");
-			button2.setAttribute("label","X");
+			var button2 = document.createElement("image");
+			button2.setAttribute("tooltiptext","X");
 			button2.setAttribute("class","whereTo");
 			button2.setAttribute("whereTo","remove");
+			button2.setAttribute("src","chrome://adhighlighter/content/resources/reorder-remove-icon.jpg");
 			xmlElementToAppend.appendChild(button2);
-			var button3 = document.createElement("button");
-			button3.setAttribute("label","^");
+			var seperator2 = document.createElement("seperator");
+			seperator2.setAttribute("width","10");
+			xmlElementToAppend.appendChild(seperator2);
+			var button3 = document.createElement("image");
+			button3.setAttribute("tooltiptext","^");
 			button3.setAttribute("class","whereTo");
 			button3.setAttribute("whereTo","up");
+			button3.setAttribute("src","chrome://adhighlighter/content/resources/reorder-up-icon.jpg");
 			xmlElementToAppend.appendChild(button3);
-			var button4 = document.createElement("button");
-			button4.setAttribute("label","T");
+			var seperator3 = document.createElement("seperator");
+			seperator3.setAttribute("width","10");
+			xmlElementToAppend.appendChild(seperator3);
+			var button4 = document.createElement("image");
+			button4.setAttribute("tooltiptext","T");
 			button4.setAttribute("class","whereTo");
 			button4.setAttribute("whereTo","top");
+			button4.setAttribute("src","chrome://adhighlighter/content/resources/reorder-top-icon.jpg");
 			xmlElementToAppend.appendChild(button4);
-			var button5 = document.createElement("button");
-			button5.setAttribute("label","D");
+			var seperator4 = document.createElement("seperator");
+			seperator4.setAttribute("width","10");
+			xmlElementToAppend.appendChild(seperator4);
+			var button5 = document.createElement("image");
+			button5.setAttribute("tooltiptext","D");
 			button5.setAttribute("class","whereTo");
 			button5.setAttribute("whereTo","down");
+			button5.setAttribute("src","chrome://adhighlighter/content/resources/reorder-down-icon.jpg");
 			xmlElementToAppend.appendChild(button5);
-			var button6 = document.createElement("button");
-			button6.setAttribute("label","B");
+			var seperator5 = document.createElement("seperator");
+			seperator5.setAttribute("width","10");
+			xmlElementToAppend.appendChild(seperator5);
+			var button6 = document.createElement("image");
+			button6.setAttribute("tooltiptext","B");
 			button6.setAttribute("class","whereTo");
 			button6.setAttribute("whereTo","bottom");
+			button6.setAttribute("src","chrome://adhighlighter/content/resources/reorder-bottom-icon.jpg");
 			xmlElementToAppend.appendChild(button6);
 			/*
 			var xmlStringToAppend = '<hbox>' +
