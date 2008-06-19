@@ -5,6 +5,9 @@
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 	title="&editor-tab-window.label;">
 	<script type='application/x-javascript' src='chrome://adhighlighter/content/editortab.js'></script>
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="editortab-strings" src="chrome://adhighlighter/locale/editortab.properties"/>
+  </stringbundleset>
 	<tabbox id="tabbox">
 		<tabs id="tabs">
 			<tab id="keyword-joiner-tab" label="&keyword-joiner.label;" linkedpanel="keyword-joiner" />

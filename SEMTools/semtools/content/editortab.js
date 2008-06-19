@@ -1,11 +1,11 @@
 window.addEventListener("load", loadAllTabs, true);
 
 function loadAllTabs () {
-	loadKeywordCreator ()
-	loadKeywordReplacer ()
-	loadKeywordGrouper ()
-	loadKeywordCleaner ()
-	loadListListeners ()
+	loadKeywordCreator ();
+	loadKeywordReplacer ();
+	loadKeywordGrouper ();
+	loadKeywordCleaner ();
+	loadListListeners ();
 	window.removeEventListener("load", loadAllTabs, true);
 }
 
@@ -631,6 +631,15 @@ function getThisBranchChildBelowTop (topId, thisElement){
 }
 
 function appendToList (listTopId){
+	var strbundle = document.getElementById("editortab-strings");
+	var tooltiptext = {};
+	tooltiptext.remove=strbundle.getString("tooltiptext.remove");
+	tooltiptext.up=strbundle.getString("tooltiptext.up");
+	tooltiptext.top=strbundle.getString("tooltiptext.top");
+	tooltiptext.down=strbundle.getString("tooltiptext.down");
+	tooltiptext.bottom=strbundle.getString("tooltiptext.bottom");
+
+	//alert(tooltiptext.remove);
 	//alert (listTopId);
 	var xmlToAppend;
 	switch (listTopId){
@@ -652,7 +661,7 @@ function appendToList (listTopId){
 			button1.setAttribute("collapsed","true");
 			xmlElementToAppend.appendChild(button1);
 			var button2 = document.createElement("image");
-			button2.setAttribute("tooltiptext","X");
+			button2.setAttribute("tooltiptext",tooltiptext.remove);
 			button2.setAttribute("class","whereTo");
 			button2.setAttribute("whereTo","remove");
 			button2.setAttribute("src","chrome://adhighlighter/content/resources/reorder-remove-icon.jpg");
@@ -661,7 +670,7 @@ function appendToList (listTopId){
 			seperator2.setAttribute("width","10");
 			xmlElementToAppend.appendChild(seperator2);
 			var button3 = document.createElement("image");
-			button3.setAttribute("tooltiptext","^");
+			button3.setAttribute("tooltiptext",tooltiptext.up);
 			button3.setAttribute("class","whereTo");
 			button3.setAttribute("whereTo","up");
 			button3.setAttribute("src","chrome://adhighlighter/content/resources/reorder-up-icon.jpg");
@@ -670,7 +679,7 @@ function appendToList (listTopId){
 			seperator3.setAttribute("width","10");
 			xmlElementToAppend.appendChild(seperator3);
 			var button4 = document.createElement("image");
-			button4.setAttribute("tooltiptext","T");
+			button4.setAttribute("tooltiptext",tooltiptext.top);
 			button4.setAttribute("class","whereTo");
 			button4.setAttribute("whereTo","top");
 			button4.setAttribute("src","chrome://adhighlighter/content/resources/reorder-top-icon.jpg");
@@ -679,7 +688,7 @@ function appendToList (listTopId){
 			seperator4.setAttribute("width","10");
 			xmlElementToAppend.appendChild(seperator4);
 			var button5 = document.createElement("image");
-			button5.setAttribute("tooltiptext","D");
+			button5.setAttribute("tooltiptext",tooltiptext.down);
 			button5.setAttribute("class","whereTo");
 			button5.setAttribute("whereTo","down");
 			button5.setAttribute("src","chrome://adhighlighter/content/resources/reorder-down-icon.jpg");
@@ -688,7 +697,7 @@ function appendToList (listTopId){
 			seperator5.setAttribute("width","10");
 			xmlElementToAppend.appendChild(seperator5);
 			var button6 = document.createElement("image");
-			button6.setAttribute("tooltiptext","B");
+			button6.setAttribute("tooltiptext",tooltiptext.bottom);
 			button6.setAttribute("class","whereTo");
 			button6.setAttribute("whereTo","bottom");
 			button6.setAttribute("src","chrome://adhighlighter/content/resources/reorder-bottom-icon.jpg");
@@ -726,7 +735,7 @@ function appendToList (listTopId){
 			button1.setAttribute("collapsed","true");
 			xmlElementToAppend.appendChild(button1);
 			var button2 = document.createElement("image");
-			button2.setAttribute("tooltiptext","X");
+			button2.setAttribute("tooltiptext",tooltiptext.remove);
 			button2.setAttribute("class","whereTo");
 			button2.setAttribute("whereTo","remove");
 			button2.setAttribute("src","chrome://adhighlighter/content/resources/reorder-remove-icon.jpg");
@@ -735,7 +744,7 @@ function appendToList (listTopId){
 			seperator2.setAttribute("width","10");
 			xmlElementToAppend.appendChild(seperator2);
 			var button3 = document.createElement("image");
-			button3.setAttribute("tooltiptext","^");
+			button3.setAttribute("tooltiptext",tooltiptext.up);
 			button3.setAttribute("class","whereTo");
 			button3.setAttribute("whereTo","up");
 			button3.setAttribute("src","chrome://adhighlighter/content/resources/reorder-up-icon.jpg");
@@ -744,7 +753,7 @@ function appendToList (listTopId){
 			seperator3.setAttribute("width","10");
 			xmlElementToAppend.appendChild(seperator3);
 			var button4 = document.createElement("image");
-			button4.setAttribute("tooltiptext","T");
+			button4.setAttribute("tooltiptext",tooltiptext.top);
 			button4.setAttribute("class","whereTo");
 			button4.setAttribute("whereTo","top");
 			button4.setAttribute("src","chrome://adhighlighter/content/resources/reorder-top-icon.jpg");
@@ -753,7 +762,7 @@ function appendToList (listTopId){
 			seperator4.setAttribute("width","10");
 			xmlElementToAppend.appendChild(seperator4);
 			var button5 = document.createElement("image");
-			button5.setAttribute("tooltiptext","D");
+			button5.setAttribute("tooltiptext",tooltiptext.down);
 			button5.setAttribute("class","whereTo");
 			button5.setAttribute("whereTo","down");
 			button5.setAttribute("src","chrome://adhighlighter/content/resources/reorder-down-icon.jpg");
@@ -762,7 +771,7 @@ function appendToList (listTopId){
 			seperator5.setAttribute("width","10");
 			xmlElementToAppend.appendChild(seperator5);
 			var button6 = document.createElement("image");
-			button6.setAttribute("tooltiptext","B");
+			button6.setAttribute("tooltiptext",tooltiptext.bottom);
 			button6.setAttribute("class","whereTo");
 			button6.setAttribute("whereTo","bottom");
 			button6.setAttribute("src","chrome://adhighlighter/content/resources/reorder-bottom-icon.jpg");
