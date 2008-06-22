@@ -17,7 +17,41 @@ var decodeURLOffImage = "chrome://adhighlighter/content/resources/decodeurl_stat
 var intSELinksOnImage = "chrome://adhighlighter/content/resources/intselinks_status_on.gif";
 var intSELinksOffImage = "chrome://adhighlighter/content/resources/intselinks_status_off.gif";
 
-window.addEventListener("load", loadSEMTools, true);
+
+function examplePageLoad(event)
+{
+  if (event.originalTarget instanceof HTMLDocument) {
+    var doc = event.originalTarget;
+    if (event.originalTarget.defaultView.frameElement) {
+      // Frame within a tab was loaded. doc should be the root document of
+      // the frameset. If you don't want do anything when frames/iframes
+      // are loaded in this web page, uncomment the following line:
+      // return;
+      // Find the root document:
+      while (doc.defaultView.frameElement) {
+        doc=doc.defaultView.frameElement.ownerDocument;
+      }
+    }
+    loadSEMTools ();
+  }
+}
+
+// do not try to add a callback until the browser window has
+// been initialised. We add a callback to the tabbed browser
+// when the browser's window gets loaded.
+window.addEventListener(
+  "load",
+  function () {
+    // Add a callback to be run every time a document loads.
+    // note that this includes frames/iframes within the document
+    gBrowser.addEventListener("load", examplePageLoad, true);
+  },
+  false
+);
+
+
+
+//window.addEventListener("load", loadSEMTools, true);
 
 function loadSEMTools () {
 	loadStatusBar ();
@@ -355,7 +389,6 @@ function adHighlighter ( enableAdHighlighter, enableAdCounter, adProvider ) {
    	null,
    	XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
    	null);
-
 	//If I can make a regex that gets all ad URLS I can use it here and that
 	//would make it simple to set other ads to one colour 
 	//Loop through all the links
@@ -370,7 +403,7 @@ function adHighlighter ( enableAdHighlighter, enableAdCounter, adProvider ) {
 					//Check if enableAdHighlighter is set to true
 					if (enableAdHighlighter)
 					{
-						thisLink.style.color = adProvider[x][2] + " ! important";
+						thisLink.style.color = adProvider[x][2];// + " ! important";
 						//Baidu hack to override red font
 						if (thisLink.firstChild.lastChild){
 						thisLink.firstChild.lastChild.color = adProvider[x][2];

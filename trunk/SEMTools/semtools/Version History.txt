@@ -27,4 +27,9 @@
 // 1.00- Moved buttons to a separate toolbar.
 //     - Added Keyword creation tools like join, replace and group.
 //     - Added URL Decoder that shows the destination URL of ads on sites like Yahoo and Baidu.
+// 1.10- Fixed some bugs with Firefox 3
+//		 - Increased max version number to FF 3.0.*
+//		 - Added Cleaner tab with some basic text modifying functions
+//		 - Changed grouper and replacer to be sets of textboxes
+//     - Added list re-ordering icond: Jon Airey
 // --------------------------------------------------------------------

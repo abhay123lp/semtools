@@ -5,7 +5,7 @@
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="adhighlighter@sidthemonkey.com"
                    em:name="SEM Tools"
-                   em:version="1.0.0"
+                   em:version="1.1.0"
                    em:creator="Richard Berry"
                    em:description="Toolkit for the SEM or affiliate marketer"
                    em:homepageURL="http://www.sidthemonkey.com/extensions/semtools/"
