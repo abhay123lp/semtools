@@ -158,7 +158,7 @@ function cleanKeywords (keywords, badKeywords){
 		var badPhrasesListTextbox = document.getElementById("cleaner-bad-phrases-textbox");
 		badPhrasesListTextbox.value = finalBadKeywordsResult;
 	}
-	if (duplicates != ""){
+	if (duplicates){
 		var finalDuplicatesResult = duplicates.join("\n");
 		var duplicatesListTextbox = document.getElementById("cleaner-duplicates-textbox");
 		duplicatesListTextbox.value = finalDuplicatesResult;

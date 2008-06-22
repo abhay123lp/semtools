@@ -66,7 +66,7 @@ function setListNames (){
 	var adHighlighterList = document.getElementById('adhighlighter-listbox');
 	var list = adHighlighterList.getElementsByTagName('listitem');
 	for (var i = 0; i < list.length; i++){
-		var thisValue = list[i].getAttribute("value");
+		var thisValue = list[i].getAttribute("checked");
 		list[i].setAttribute("label", thisValue);
 	}
 }
@@ -156,7 +156,7 @@ function setSEListNames (){
 	var intSELinksList = document.getElementById('selinks-listbox');
 	var list = intSELinksList.getElementsByTagName('listitem');
 	for (var i = 0; i < list.length; i++){
-		var thisValue = list[i].getAttribute("value");
+		var thisValue = list[i].getAttribute("checked");
 		list[i].setAttribute("label", thisValue);
 	}
 }
