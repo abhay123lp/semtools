@@ -197,7 +197,7 @@
 									<checkbox id="remove-end-spaces" label="&remove-end-spaces-checkbox.label;"/>
 									<checkbox id="remove-double-spaces" label="&remove-double-spaces-checkbox.label;"/>
 									</groupbox>
-	                <groupbox collapsed="true">
+	                <groupbox collapsed="false">
 	                  <caption>
 	                  <checkbox id="bad-words-group-checkbox" label="&bad-words-group-checkbox.label;"/>
 	                  </caption>
@@ -219,7 +219,7 @@
 	                  <label value="&remove-long-phrases-value.description;" control="max-words-per-phrase" disabled="true"/>
 	                  </hbox>
 	                </groupbox>
-	                <groupbox collapsed="true">
+	                <groupbox collapsed="false">
 	                  <caption>
 	                  <checkbox id="duplicate-group-checkbox" label="&duplicate-words-group-checkbox.label;"/>
 	                  </caption>
@@ -229,7 +229,7 @@
 	                    <checkbox id = "remove-all-duplicate-copies" label="&remove-all-duplicate-copies-checkbox.label;" disabled="true" />
 	                  </radiogroup>
 	                </groupbox>
-	                <groupbox collapsed="true">
+	                <groupbox collapsed="false">
 	                  <caption>
 	                  <checkbox id="sort-group-checkbox" label="&sort-group-checkbox.label;"/>
 	                  </caption>
@@ -247,7 +247,7 @@
 							</vbox>
 						</hbox>
 						<vbox>
-						  <groupbox>
+						  <groupbox collapsed="true">
 						    <caption label = "&saved-settings-groupbox.label;"/>
 						  </groupbox>
 						</vbox>
